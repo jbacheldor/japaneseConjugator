@@ -30,6 +30,9 @@ body {
 
 .input-tester {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #japanese {
@@ -49,6 +52,21 @@ body {
     background-size: 100% auto;
     background-image: url("./svgs/Background.svg");
     position: absolute;
+}
+
+#homeButton {
+    background-image: url("./svgs/button.svg");
+    width: 137px;
+    height: 35px;
+}
+
+#homeButton:hover {
+    background-color: yellow;
+    background-image: none;
+}
+
+p {
+    text-align: center;
 }
 
 footer {
