@@ -17,15 +17,19 @@ body {
 #centerHeader {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 #leftHeader {
-    margin: 20px;
+    margin: 0 20px;
 }
 
 #rightHeader {
-    margin: 20px;
+    margin: 0 20px;
+}
+
+.input-tester {
+    height: 100%;
 }
 
 #japanese {
@@ -41,7 +45,15 @@ body {
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    background-size: cover;
-    background-color: #E1FAC0;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-image: url("./svgs/Background.svg");
     position: absolute;
+}
+
+footer {
+    display: flex;
+    align-self: flex-end;
+    justify-content: space-around;
+    margin: 0 10px;
 }
