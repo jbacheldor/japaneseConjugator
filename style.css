@@ -1,10 +1,6 @@
 body {
-    /* background: url("./svgs/background.svg"); */
-    /* width: 560px;
-    height: 665px;
-    background-size: cover;
-    background-image: url("./svgs/background.svg"); */
     font-family: "Poetsen One";
+    vertical-align: middle;
 }
 
 @font-face {
@@ -13,10 +9,39 @@ body {
     src: url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.svg#Poetsen One")format("svg");
 }
 
+#header {
+    display: flex;
+    flex-direction: row;
+}
+
+#centerHeader {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+#leftHeader {
+    margin: 20px;
+}
+
+#rightHeader {
+    margin: 20px;
+}
+
+#japanese {
+    display: flex;
+    justify-content: center;
+}
+
 #background {
     width: 560px;
     height: 665px;
+    display: flex;
+    position: relative;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
     background-size: cover;
-    background-image: url("./svgs/background.svg");
+    background-color: #E1FAC0;
     position: absolute;
 }
