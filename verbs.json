@@ -1,0 +1,48 @@
+{
+    "GenkiOne": {
+        "verb": {
+            "kanji form": "",
+            "base form": "",
+            "stem": "",
+            "present positive": "",
+            "present negative": "",
+            "past positive": "",
+            "past negative": "",
+            "te form": ""
+        }
+    },
+    "GenkTwo2": {
+
+    },
+    "GenkiThree": {
+        "to be": {
+            "kanji form": "desu",
+            "base form": "",
+            "stem": "",
+            "present positive": "desu",
+            "present negative": "janaidesu",
+            "past positive": "deshita",
+            "past negative": "janakatadesu",
+            "te form": ""
+        },
+        "to go": {
+            "kanji form": "行く",
+            "base form": "iku",
+            "stem": "iki",
+            "present positive": "ikimasu",
+            "present negative": "ikimasen",
+            "past positive": "ikimashita",
+            "past negative": "ikimasendeshita",
+            "te form": "i(tsu)te"
+        }
+    },
+    "GenkiFour": {
+
+    },
+    "GenkiFive": {
+
+    },
+    "GenkiSix": {
+
+    }
+}

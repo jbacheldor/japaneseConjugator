@@ -1,0 +1,22 @@
+body {
+    /* background: url("./svgs/background.svg"); */
+    /* width: 560px;
+    height: 665px;
+    background-size: cover;
+    background-image: url("./svgs/background.svg"); */
+    font-family: "Poetsen One";
+}
+
+@font-face {
+    font-family: "Poetsen One";
+    src: url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.eot");
+    src: url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/e7f249e71a563eed9c495835657eb9c2.svg#Poetsen One")format("svg");
+}
+
+#background {
+    width: 560px;
+    height: 665px;
+    background-size: cover;
+    background-image: url("./svgs/background.svg");
+    position: absolute;
+}
