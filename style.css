@@ -28,11 +28,39 @@ body {
     margin: 0 20px;
 }
 
+#questionTitle {
+    border-radius: 10px;
+    background-color: #85AD52;
+    height: 100px;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+#tag {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.bodySection {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .input-tester {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-self: center;
+    border-radius: 10px;
+    align-items: center;
     justify-content: center;
+    background-color: #EFFFDA;
+    height: 300px;
+    width: 300px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, .5));
 }
 
 #japanese {
@@ -57,12 +85,19 @@ body {
 #homeButton {
     background-image: url("./svgs/button.svg");
     width: 137px;
-    height: 35px;
+    height: 50px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 #homeButton:hover {
-    background-color: yellow;
+    background-image: url("./svgs/button.svg");
+    background-color: #A7D073;
     background-image: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 p {
@@ -74,4 +109,16 @@ footer {
     align-self: flex-end;
     justify-content: space-around;
     margin: 0 10px;
+}
+
+button#submit {
+    text-decoration: none;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+    background-color: #85AD52;
+    font-family: inherit;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
 }
