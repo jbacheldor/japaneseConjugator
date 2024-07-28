@@ -82,8 +82,8 @@ body {
     position: absolute;
 }
 
-#homeButton {
-    background-image: url("./svgs/button.svg");
+#questionAnswer {
+    background-color: #A7D073;
     width: 137px;
     height: 50px;
     display: flex;
@@ -92,9 +92,8 @@ body {
     align-items: center;
 }
 
-#homeButton:hover {
-    background-image: url("./svgs/button.svg");
-    background-color: #A7D073;
+#questionAnswer:hover {
+    background-color: #85AD52;
     background-image: none;
     border-radius: 10px;
     cursor: pointer;
@@ -102,6 +101,11 @@ body {
 
 p {
     text-align: center;
+}
+
+#questionAnswer[selected="true"] {
+    background-color: #85AD52;
+    font-weight: 700;
 }
 
 footer {
