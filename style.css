@@ -43,7 +43,7 @@ body {
     right: 10px;
 }
 
-.bodySection {
+.menuSection {
     height: 100%;
     display: flex;
     align-items: center;
@@ -104,7 +104,8 @@ p {
 }
 
 #questionAnswer[selected="true"] {
-    background-color: #85AD52;
+    background-color: #506732;
+    color: white;
     font-weight: 700;
 }
 
