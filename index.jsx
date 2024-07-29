@@ -43,14 +43,15 @@ function submitInfo(Event){
 
     console.log(newList);
     if(newList.includes('Build your Own')){
-        console.log('woah');
         createMenu('Which vocabulary do you want to study?', typesOfSpeech);
-    } else {
-        console.log('oh no');
+    } else if (newList.includes('Follow a Course')) {
         createMenu('what course do you want to follow?', courseOptions);
+    } else if (newList.includes('genki')) {
+        createMenu('Genki Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
-    // document.removeChild(menuSection);
-    // createMenu();
+    else if (newList.includes('jplt')){
+        createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
+    } 
 }
 
 // womp womp wompppp - on certain ones u can only select one

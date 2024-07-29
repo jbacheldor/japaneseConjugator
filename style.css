@@ -50,7 +50,6 @@ body {
 }
 
 .input-tester {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -59,8 +58,14 @@ body {
     justify-content: center;
     background-color: #EFFFDA;
     height: 300px;
-    width: 300px;
+    width: 350px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, .5));
+}
+
+.bodySection {
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 #japanese {
@@ -69,8 +74,8 @@ body {
 }
 
 #background {
-    width: 560px;
-    height: 665px;
+    width: 500px;
+    height: 600px;
     display: flex;
     position: relative;
     /* justify-content: center; */
