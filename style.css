@@ -66,6 +66,8 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #japanese {
@@ -131,4 +133,62 @@ button#submit {
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+
+/* buttons */
+
+#back {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#back:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
+}
+
+#next:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
+}
+
+#next {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button :hover {
+    cursor: pointer;
+    background-color: #A7D073;
+    width: 137px;
+    height: 50px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
 }

@@ -8,6 +8,15 @@ const howToStudy = ['Follow a Course', "Build your Own"];
 const verbForms = ['Te Form', 'Present Affirmative', 'Present Negative', 'Past Affirmative', 'Past Negative', 'Long Form', 'Short Form'];
 const adjectiveForms = [];
 
+function createButtons(name, section) {
+    const button = document.createElement('button');
+    button.setAttribute('id', name);
+    button.innerText = name;
+
+    section.append(button);
+}
+
+// singular or multple
 function createMenu(question, answers) {
 
     inputOption = document.createElement('p');
@@ -22,6 +31,8 @@ function createMenu(question, answers) {
         menuSection.append(questionAnswer);
         questionAnswer.addEventListener('click', selectElement);
     }
+
+    // gotta make it so you can only select all on certain ones 
 
     submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
@@ -41,6 +52,12 @@ function submitInfo(Event){
 
     menuSection.replaceChildren(); 
 
+    const footerSection = document.createElement('div');
+    footerSection.setAttribute('id', 'footerSection');
+    bodySection.append(footerSection);
+    createButtons('back', footerSection);
+    createButtons('next', footerSection);
+
     console.log(newList);
     if(newList.includes('Build your Own')){
         createMenu('Which vocabulary do you want to study?', typesOfSpeech);
@@ -53,15 +70,6 @@ function submitInfo(Event){
         createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
     } 
 }
-
-// womp womp wompppp - on certain ones u can only select one
-
-// Genki Chapters
-// 1 - 12
-
-// JPLT
-// 1 - 5
-
 // verb forms
 // adjective forms
 
