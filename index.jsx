@@ -19,7 +19,6 @@ function createButtons(name, section) {
 
 
 function createGenkiMenu(answers) {
-    console.log(answers);
     bookTitle = document.createElement('p');
     bookTitle.setAttribute('id','bookTitle');
     for(var i = 0; i < answers.length; i++){
@@ -34,8 +33,17 @@ function createGenkiMenu(answers) {
         bookTitle.append(questionAnswer);
         questionAnswer.addEventListener('click', selectElement);
     }
-
     menuSection.append(bookTitle);
+    createSubmitButton();
+}
+
+function createSubmitButton() {
+    submitButton = document.createElement('button');
+    submitButton.setAttribute('id', 'submit');
+    submitButton.innerHTML = 'submit';
+    menuSection.append(submitButton);
+
+    submitButton.addEventListener("click", submitInfo);
 }
 
 // singular or multple
@@ -46,7 +54,7 @@ function createMenu(question, answers) {
     inputOption.innerHTML = question;
     menuSection.append(inputOption);
 
-    if(question === 'Genki Chapters'){
+    if(question === 'Genki 1 Chapters'){
         createGenkiMenu(answers);
     } 
     else {
@@ -59,15 +67,14 @@ function createMenu(question, answers) {
         }
     
         // gotta make it so you can only select all on certain ones 
-    
-        submitButton = document.createElement('button');
-        submitButton.setAttribute('id', 'submit');
-        submitButton.innerHTML = 'submit';
-        menuSection.append(submitButton);
-    
-        submitButton.addEventListener("click", submitInfo);
+        createSubmitButton();
     }
-
+    // need to remove the existing q's and all in this
+    // if(question === "Genki 1 Chapters"){
+    //     createButtons('back', footerSection);
+    //     createButtons('select all', footerSection);
+    //     createButtons('next', footerSection);
+    // }
     if(!body.querySelector('#back') && question !== 'How would you like to learn?') {
         const footerSection = document.createElement('div');
         footerSection.setAttribute('id', 'footerSection');
@@ -93,7 +100,7 @@ function submitInfo(Event){
     } else if (newList.includes('Follow a Course')) {
         createMenu('what course do you want to follow?', courseOptions);
     } else if (newList.includes('genki')) {
-        createMenu('Genki Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+        createMenu('Genki 1 Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
     else if (newList.includes('jplt')){
         createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);

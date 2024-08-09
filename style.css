@@ -31,7 +31,7 @@ body {
 #questionTitle {
     border-radius: 10px;
     background-color: #85AD52;
-    height: 100px;
+    min-height: 50px;
     padding: 0 10px 0 10px;
     display: flex;
     align-items: center;
@@ -52,14 +52,14 @@ body {
 .input-tester {
     display: flex;
     flex-direction: column;
-    justify-self: center;
     border-radius: 10px;
     align-items: center;
-    justify-content: center;
     background-color: #EFFFDA;
     height: 300px;
     width: 350px;
+    /* flex-grow: .50; */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, .5));
+    overflow-y: scroll;
 }
 
 .bodySection {
