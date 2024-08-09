@@ -13,13 +13,32 @@ function createButtons(name, section, onClickFunc) {
     button.setAttribute('id', name);
     button.innerText = name;
 
-    button.addEventListener('click', () => {onClickFunc()});
+    button.addEventListener('click', (Event) => {onClickFunc(Event)});
 
     section.append(button);
 }
 
-function selectAll() {
-    console.log('click clik');
+function selectAll(Event) {
+    const answersEven = document.querySelectorAll('#bookAnswerEven');
+    const answersOdd = document.querySelectorAll('#bookAnswerOdd');
+    
+    if(Event.target.getAttribute('selected') === "true" ) {
+        Event.target.removeAttribute('selected');
+        for(var i = 0; i < answersEven.length; i++){
+            answersEven[i].removeAttribute('selected');
+        }
+        for(var i = 0; i < answersOdd.length; i++){
+            answersOdd[i].removeAttribute('selected');
+        }
+    } else {
+        Event.target.setAttribute('selected', 'true');
+        for(var i = 0; i < answersEven.length; i++){
+            answersEven[i].setAttribute('selected', true);
+        }
+        for(var i = 0; i < answersOdd.length; i++){
+            answersOdd[i].setAttribute('selected', true);
+        }
+    }
 }
 
 function goNext() {
@@ -136,7 +155,6 @@ function submitInfo(Event){
 
     menuSection.replaceChildren(); 
 
-    console.log(newList);
     if(newList.includes('Build your Own')){
         createMenu('Which vocabulary do you want to study?', typesOfSpeech);
     } else if (newList.includes('Follow a Course')) {
