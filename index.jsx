@@ -8,12 +8,27 @@ const howToStudy = ['Follow a Course', "Build your Own"];
 const verbForms = ['Te Form', 'Present Affirmative', 'Present Negative', 'Past Affirmative', 'Past Negative', 'Long Form', 'Short Form'];
 const adjectiveForms = [];
 
-function createButtons(name, section) {
+function createButtons(name, section, onClickFunc) {
     const button = document.createElement('button');
     button.setAttribute('id', name);
     button.innerText = name;
 
+    button.addEventListener('click', () => {onClickFunc()});
+
     section.append(button);
+}
+
+function selectAll() {
+    console.log('click clik');
+}
+
+function goNext() {
+    console.log('go next');
+
+}
+
+function goBack() {
+    console.log('go back');
 }
 
 
@@ -98,16 +113,16 @@ function createMenu(question, answers) {
     if(question === "Genki 1 Chapters"){
         const footerSection = document.querySelector('#footerSection');
         footerSection.replaceChildren();
-        createButtons('back', footerSection);
-        createButtons('select all', footerSection);
-        createButtons('next', footerSection);
+        createButtons('back', footerSection, goBack);
+        createButtons('select all', footerSection, selectAll);
+        createButtons('next', footerSection, goNext);
     }
     if(!body.querySelector('#back') && question !== 'How would you like to learn?') {
         const footerSection = document.createElement('div');
         footerSection.setAttribute('id', 'footerSection');
         bodySection.append(footerSection);
-        createButtons('back', footerSection);
-        createButtons('next', footerSection);
+        createButtons('back', footerSection, goBack);
+        createButtons('next', footerSection, goNext);
     }
 }
 

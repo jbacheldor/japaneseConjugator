@@ -125,7 +125,7 @@ footer {
 
 button#submit {
     text-decoration: none;
-    height: 30px;
+    min-height: 30px;
     width: 100px;
     margin: 10px;
     background-color: #85AD52;
@@ -255,4 +255,10 @@ button[id='select all'] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button[id='select all']:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
 }
