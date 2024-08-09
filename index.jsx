@@ -19,6 +19,7 @@ function createButtons(name, section) {
 
 
 function createGenkiMenu(answers) {
+    // genki 1 and genki 2
     bookTitle = document.createElement('p');
     bookTitle.setAttribute('id','bookTitle');
     for(var i = 0; i < answers.length; i++){
@@ -34,6 +35,30 @@ function createGenkiMenu(answers) {
         questionAnswer.addEventListener('click', selectElement);
     }
     menuSection.append(bookTitle);
+
+    // this will have to be Genki 2 but we aren't there justttt yet
+
+    inputOption = document.createElement('p');
+    inputOption.setAttribute('id', 'questionTitle');
+    inputOption.innerHTML = 'Genki 2 Chapters';
+    menuSection.append(inputOption);
+
+    bookTitle = document.createElement('p');
+    bookTitle.setAttribute('id','bookTitle');
+    for(var i = 0; i < answers.length; i++){
+        questionAnswer = document.createElement('button');
+        if(i % 2 == 0) {
+            questionAnswer.setAttribute('id', 'bookAnswerEven');
+        }
+        else {
+            questionAnswer.setAttribute('id', 'bookAnswerOdd');
+        }
+        questionAnswer.innerHTML = answers[i];
+        bookTitle.append(questionAnswer);
+        questionAnswer.addEventListener('click', selectElement);
+    }
+    menuSection.append(bookTitle);
+
     createSubmitButton();
 }
 
@@ -69,12 +94,14 @@ function createMenu(question, answers) {
         // gotta make it so you can only select all on certain ones 
         createSubmitButton();
     }
-    // need to remove the existing q's and all in this
-    // if(question === "Genki 1 Chapters"){
-    //     createButtons('back', footerSection);
-    //     createButtons('select all', footerSection);
-    //     createButtons('next', footerSection);
-    // }
+
+    if(question === "Genki 1 Chapters"){
+        const footerSection = document.querySelector('#footerSection');
+        footerSection.replaceChildren();
+        createButtons('back', footerSection);
+        createButtons('select all', footerSection);
+        createButtons('next', footerSection);
+    }
     if(!body.querySelector('#back') && question !== 'How would you like to learn?') {
         const footerSection = document.createElement('div');
         footerSection.setAttribute('id', 'footerSection');

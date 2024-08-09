@@ -244,3 +244,15 @@ button :hover {
     background-color: #506732;
     color: white;
 }
+
+button[id='select all'] {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
