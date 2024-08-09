@@ -28,11 +28,46 @@ body {
     margin: 0 20px;
 }
 
-.input-tester {
+#questionTitle {
+    border-radius: 10px;
+    background-color: #85AD52;
+    min-height: 50px;
+    padding: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+#tag {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.menuSection {
     height: 100%;
     display: flex;
+    align-items: center;
+}
+
+.input-tester {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
+    border-radius: 10px;
+    align-items: center;
+    background-color: #EFFFDA;
+    height: 300px;
+    width: 350px;
+    /* flex-grow: .50; */
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, .5));
+    overflow-y: scroll;
+}
+
+.bodySection {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 #japanese {
@@ -41,8 +76,8 @@ body {
 }
 
 #background {
-    width: 560px;
-    height: 665px;
+    width: 500px;
+    height: 600px;
     display: flex;
     position: relative;
     /* justify-content: center; */
@@ -54,19 +89,31 @@ body {
     position: absolute;
 }
 
-#homeButton {
-    background-image: url("./svgs/button.svg");
+#questionAnswer {
+    background-color: #A7D073;
     width: 137px;
-    height: 35px;
+    height: 50px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
-#homeButton:hover {
-    background-color: yellow;
+#questionAnswer:hover {
+    background-color: #85AD52;
     background-image: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 p {
     text-align: center;
+}
+
+#questionAnswer[selected="true"] {
+    background-color: #506732;
+    color: white;
+    font-weight: 700;
 }
 
 footer {
@@ -74,4 +121,144 @@ footer {
     align-self: flex-end;
     justify-content: space-around;
     margin: 0 10px;
+}
+
+button#submit {
+    text-decoration: none;
+    min-height: 30px;
+    width: 100px;
+    margin: 10px;
+    background-color: #85AD52;
+    font-family: inherit;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* buttons */
+
+#back {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#back:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
+}
+
+#next:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
+}
+
+#next {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button :hover {
+    cursor: pointer;
+    background-color: #A7D073;
+    width: 137px;
+    height: 50px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
+}
+
+#bookTitle {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+#bookAnswerEven {
+    background-color: #A7D073;
+    width: 50px;
+    font: inherit;
+    height: 50px;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    border: none;
+    align-items: center;
+}
+
+#bookAnswerEven:hover {
+    cursor: pointer;
+}
+
+#bookAnswerEven[selected=true] {
+    background-color: #506732;
+    color: white;
+}
+
+#bookAnswerOdd {
+    background-color: #85AD52;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    font: inherit;
+    border: none;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#bookAnswerOdd:hover {
+    cursor: pointer;
+}
+
+#bookAnswerOdd[selected=true] {
+    background-color: #506732;
+    color: white;
+}
+
+button[id='select all'] {
+    font-family: inherit;
+    background-color: #A7D073;
+    border-radius: 10px;
+    border: none;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button[id='select all']:hover {
+    cursor: pointer;
+    background-color: #506732;
+    color: white;
 }
