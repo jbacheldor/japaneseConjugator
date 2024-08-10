@@ -21,8 +21,13 @@ function createButtons(name, section, onClickFunc) {
 function selectAll(Event) {
     const answersEven = document.querySelectorAll('#bookAnswerEven');
     const answersOdd = document.querySelectorAll('#bookAnswerOdd');
-    
-    if(Event.target.getAttribute('selected') === "true" ) {
+
+    // this is working somehow
+    console.log(Event.target);;
+    console.log("is this eelcted ",Event.target.getAttribute('selected'));
+
+
+    if(Event.target.getAttribute('selected') === "true") {
         Event.target.removeAttribute('selected');
         for(var i = 0; i < answersEven.length; i++){
             answersEven[i].removeAttribute('selected');
@@ -31,7 +36,7 @@ function selectAll(Event) {
             answersOdd[i].removeAttribute('selected');
         }
     } else {
-        Event.target.setAttribute('selected', 'true');
+        Event.target.setAttribute('selected', true);
         for(var i = 0; i < answersEven.length; i++){
             answersEven[i].setAttribute('selected', true);
         }
@@ -66,7 +71,7 @@ function createGenkiMenu(answers) {
         }
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
-        questionAnswer.addEventListener('click', selectElement);
+        questionAnswer.addEventListener('click', selectMultipleElement);
     }
     menuSection.append(bookTitle);
 
@@ -89,7 +94,7 @@ function createGenkiMenu(answers) {
         }
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
-        questionAnswer.addEventListener('click', selectElement);
+        questionAnswer.addEventListener('click', selectMultipleElement);
     }
     menuSection.append(bookTitle);
 
@@ -122,7 +127,7 @@ function createMenu(question, answers) {
             questionAnswer.setAttribute('id', 'questionAnswer');
             questionAnswer.innerHTML = answers[i];
             menuSection.append(questionAnswer);
-            questionAnswer.addEventListener('click', selectElement);
+            questionAnswer.addEventListener('click', selectSingleElement);
         }
     
         // gotta make it so you can only select all on certain ones 
@@ -169,14 +174,36 @@ function submitInfo(Event){
 // verb forms
 // adjective forms
 
-function selectElement(Event) {
-    if(Event.target.getAttribute('selected') === "true"){
+// this is for when you can only select one
+// ie: if the target is Genki or JPLT or one of the singular elements 
+function selectSingleElement(Event) {
+    const selected = document.querySelector('[selected="true"]');
+
+
+    // handles use case for removing if double clicked
+    if(Event.target.getAttribute('selected')){
+        Event.target.removeAttribute('selected');
+    }
+    // if a different one is clicked
+    else {
+        // if selected is true then we have to unselect that one and select target
+        if(selected) {
+            selected.removeAttribute('selected');
+        }
+        Event.target.setAttribute('selected', "true");
+    }
+}
+
+// this is for when you can select multiple options on the screen
+function selectMultipleElement(Event) {
+    if(Event.target.getAttribute('[selected="true"]')){
         Event.target.removeAttribute('selected');
     }
     else {
-        Event.target.setAttribute('selected', true);
+        Event.target.setAttribute('selected', "true");
     }
 }
+
 
 // // add event listen f
 
