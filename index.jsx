@@ -22,11 +22,6 @@ function selectAll(Event) {
     const answersEven = document.querySelectorAll('#bookAnswerEven');
     const answersOdd = document.querySelectorAll('#bookAnswerOdd');
 
-    // this is working somehow
-    console.log(Event.target);;
-    console.log("is this eelcted ",Event.target.getAttribute('selected'));
-
-
     if(Event.target.getAttribute('selected') === "true") {
         Event.target.removeAttribute('selected');
         for(var i = 0; i < answersEven.length; i++){
@@ -46,13 +41,17 @@ function selectAll(Event) {
     }
 }
 
+// maybe do some switch case stuff - but that's for tomorrowww
 function goNext() {
     console.log('go next');
+    menuSection.replaceChildren(); 
 
 }
 
 function goBack() {
-    console.log('go back');
+    console.log('go back');    
+    menuSection.replaceChildren(); 
+
 }
 
 
@@ -179,7 +178,6 @@ function submitInfo(Event){
 function selectSingleElement(Event) {
     const selected = document.querySelector('[selected="true"]');
 
-
     // handles use case for removing if double clicked
     if(Event.target.getAttribute('selected')){
         Event.target.removeAttribute('selected');
@@ -196,7 +194,7 @@ function selectSingleElement(Event) {
 
 // this is for when you can select multiple options on the screen
 function selectMultipleElement(Event) {
-    if(Event.target.getAttribute('[selected="true"]')){
+    if(Event.target.getAttribute('selected')){
         Event.target.removeAttribute('selected');
     }
     else {
