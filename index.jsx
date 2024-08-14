@@ -44,14 +44,16 @@ function selectAll(Event) {
 // maybe do some switch case stuff - but that's for tomorrowww
 function goNext() {
     console.log('go next');
+    const pageNum = sessionStorage.getItem('nextPage');
     menuSection.replaceChildren(); 
-
+    figureOutPage(pageNum);
 }
 
 function goBack() {
     console.log('go back');    
+    const pageNum = sessionStorage.getItem('prevPage');
     menuSection.replaceChildren(); 
-
+    figureOutPage(pageNum);    
 }
 
 
@@ -109,6 +111,38 @@ function createSubmitButton() {
     submitButton.addEventListener("click", submitInfo);
 }
 
+function updateStorage(nextPage, prevPage)
+{
+    sessionStorage.setItem('nextPage', nextPage);
+    sessionStorage.setItem('prevPage', prevPage);
+}
+
+function figureOutPage(pageNumber)
+{
+   pageNumber = Number(pageNumber);
+    switch(pageNumber) {
+        case 2:
+            updateStorage(0, 1);
+            createMenu('Which vocabulary do you want to study?', typesOfSpeech);
+            break;
+        case 3:
+            updateStorage(0, 1);
+            createMenu('what course do you want to follow?', courseOptions);
+            break;
+        case 4:
+            updateStorage(0, 3);
+            createMenu('Genki 1 Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+            break;
+        case 5:
+            updateStorage(0, 3);
+            createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
+            break;
+        default:
+            updateStorage(0, 0);
+            createMenu('How would you like to learn?', howToStudy);
+            break;
+    }
+}
 // singular or multple
 // mayhaps - make this be a switch case - makes incrementing and decrementing ezzz
 function createMenu(question, answers) {
@@ -160,14 +194,14 @@ function submitInfo(Event){
     menuSection.replaceChildren(); 
 
     if(newList.includes('Build your Own')){
-        createMenu('Which vocabulary do you want to study?', typesOfSpeech);
+        figureOutPage(2);
     } else if (newList.includes('Follow a Course')) {
-        createMenu('what course do you want to follow?', courseOptions);
+        figureOutPage(3);
     } else if (newList.includes('genki')) {
-        createMenu('Genki 1 Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+        figureOutPage(4);
     }
     else if (newList.includes('jplt')){
-        createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
+        figureOutPage(5);
     } 
 }
 // verb forms
