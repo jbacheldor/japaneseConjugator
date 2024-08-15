@@ -120,6 +120,9 @@ function updateStorage(nextPage, prevPage)
 function figureOutPage(pageNumber)
 {
    pageNumber = Number(pageNumber);
+    const button = document.querySelector('[id="select all"]');
+    if(button) bodySection.removeChild(button.parentNode);
+
     switch(pageNumber) {
         case 2:
             updateStorage(0, 1);
@@ -130,7 +133,7 @@ function figureOutPage(pageNumber)
             createMenu('what course do you want to follow?', courseOptions);
             break;
         case 4:
-            updateStorage(0, 3);
+            updateStorage(0, 3); 
             createMenu('Genki 1 Chapters', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
             break;
         case 5:
