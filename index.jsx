@@ -6,7 +6,7 @@ const courseOptions = ['genki', 'jplt'];
 const typesOfSpeech = ['verbs', 'adverbs'];
 const howToStudy = ['Follow a Course', "Build your Own"];
 const verbForms = ['Te Form', 'Present Affirmative', 'Present Negative', 'Past Affirmative', 'Past Negative', 'Long Form', 'Short Form'];
-const adjectiveForms = [];
+const adjectiveForms = ['Na', 'I'];
 
 function createButtons(name, section, onClickFunc) {
     const button = document.createElement('button');
@@ -140,6 +140,14 @@ function figureOutPage(pageNumber)
             updateStorage(0, 3);
             createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
             break;
+        // case 6:
+        //     updateStorage(0, 3);
+        //     createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
+        //     break;
+        // case 7:
+        //     updateStorage(0, 3);
+        //     createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
+        //     break;
         default:
             updateStorage(0, 0);
             createMenu('How would you like to learn?', howToStudy);
@@ -163,7 +171,12 @@ function createMenu(question, answers) {
             questionAnswer.setAttribute('id', 'questionAnswer');
             questionAnswer.innerHTML = answers[i];
             menuSection.append(questionAnswer);
-            questionAnswer.addEventListener('click', selectSingleElement);
+            if(question === 'Which vocabulary do you want to study?'){
+                questionAnswer.addEventListener('click', selectMultipleElement);
+            }
+            else {
+                questionAnswer.addEventListener('click', selectSingleElement);
+            }
         }
     
         // gotta make it so you can only select all on certain ones 
