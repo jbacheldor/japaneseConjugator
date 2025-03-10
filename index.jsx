@@ -56,8 +56,6 @@ function goBack() {
     figureOutPage(pageNum);    
 }
 
-
-
 function createGenkiMenu(answers) {
     // genki 1 and genki 2
     bookTitle = document.createElement('div');
@@ -104,15 +102,16 @@ function createQuizPage() {
     home.innerText = "home"
     topQuiz.append(home)
 
-    form = document.createElement('p');
+    form = document.createElement('span');
     form.setAttribute('id', 'formTitle');
+    form.innerHTML = "{Form Here}"
     topQuiz.append(form)
 
     tutorial = document.createElement('button');
     tutorial.setAttribute('id','tutorialButton');
     tutorial.innerText = "tutorial"
     topQuiz.append(tutorial)
-    bodySection.append(topQuiz)
+    menuSection.append(topQuiz)
 
     // add in the target value
     mainBlock = document.createElement('div');
@@ -120,38 +119,56 @@ function createQuizPage() {
 
     superScript = document.createElement('span');
     superScript.setAttribute('id', 'superScript');
+    superScript.innerHTML = "た"
     mainBlock.append(superScript);
 
     kanjiBlock = document.createElement('span');
     kanjiBlock.setAttribute('id', 'kanjiBlock');
+    kanjiBlock.innerHTML = "食べる"
     mainBlock.append(kanjiBlock);
 
     translated = document.createElement('span');
     translated.setAttribute('id', 'translated');
+    translated.innerHTML = "v. to eat"
     mainBlock.append(translated);
-    bodySection.append(mainBlock)
+    menuSection.append(mainBlock)
 
 
     // add in the user value inputs 
+    inputContainer = document.createElement('div');
+    inputContainer.setAttribute('id', 'containerInputBox');
+
     inputBox = document.createElement('div');
     inputBox.setAttribute('id', 'inputBox');
+
+    inputContainer.append(inputBox);
+
 
     clearButton = document.createElement('button');
     clearButton.setAttribute('id', 'clearButton');
     clearButton.innerText = "clear"
     inputBox.append(clearButton)
+    // menuSection.append(inputContainer)
 
-    for(var i = 0; i++; i< 5){
-        createInputTiles(inputBox)
+    var listOfTiles = ["た", "べ", "ま", "す"]
+
+    // tileWrapper = document.createElement('div')
+    // tileWrapper.setAttribute('id', 'inputTiles');
+    
+    for(let i = 0; i < listOfTiles.length; i++){
+        inputBox.append(createInputTiles(listOfTiles[i]))
     }
 
-    bodySection.append(inputBox)
+    inputContainer.append(inputBox)
+
+    menuSection.append(inputContainer)
 }
 
 // need to have this separate because the input tiles will be dynamically rendered each time i think
-function createInputTiles(parentNode) {
+function createInputTiles(value) {
     inputTiles = document.createElement('input');
     inputTiles.setAttribute('class', 'inputTiles');
+    inputTiles.value = value
 
     inputTiles.addEventListener("keydown", e => {
         console.log(e.keycode)
@@ -173,7 +190,7 @@ function createInputTiles(parentNode) {
             //   break;
           }
     })
-    parentNode.append(inputTiles)
+    return inputTiles
 }
 
 function createResultsPage() {
@@ -338,6 +355,6 @@ function selectMultipleElement(Event) {
 
 // })
 
-createMenu('How would you like to learn?', howToStudy);
+// createMenu('How would you like to learn?', howToStudy);
 
-// createQuizPage()
+createQuizPage()
