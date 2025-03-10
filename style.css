@@ -92,7 +92,7 @@ body {
 #questionAnswer {
     background-color: #A7D073;
     width: 137px;
-    height: 50px;
+    min-height: 50px;
     display: flex;
     border-radius: 10px;
     justify-content: center;
@@ -203,44 +203,31 @@ button :hover {
     padding: 0 10px;
 }
 
-#bookAnswerEven {
+#bookTitle > button {
+    height: 50px;
+    font: inherit;
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+#bookTitle > button:nth-child(even){
     background-color: #A7D073;
     width: 50px;
-    font: inherit;
-    height: 50px;
-    display: flex;
-    border-radius: 10px;
-    justify-content: center;
-    border: none;
-    align-items: center;
 }
 
-#bookAnswerEven:hover {
-    cursor: pointer;
-}
-
-#bookAnswerEven[selected=true] {
-    background-color: #506732;
-    color: white;
-}
-
-#bookAnswerOdd {
+#bookTitle > button:nth-child(odd){
     background-color: #85AD52;
     width: 130px;
-    height: 50px;
-    display: flex;
-    font: inherit;
-    border: none;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
 }
 
-#bookAnswerOdd:hover {
+#bookTitle > button:hover {
     cursor: pointer;
 }
 
-#bookAnswerOdd[selected=true] {
+#bookTitle > button[selected=true] {
     background-color: #506732;
     color: white;
 }

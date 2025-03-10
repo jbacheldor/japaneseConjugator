@@ -60,23 +60,15 @@ function goBack() {
 
 function createGenkiMenu(answers) {
     // genki 1 and genki 2
-    bookTitle = document.createElement('p');
+    bookTitle = document.createElement('div');
     bookTitle.setAttribute('id','bookTitle');
     for(var i = 0; i < answers.length; i++){
         questionAnswer = document.createElement('button');
-        if(i % 2 == 0) {
-            questionAnswer.setAttribute('id', 'bookAnswerEven');
-        }
-        else {
-            questionAnswer.setAttribute('id', 'bookAnswerOdd');
-        }
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
         questionAnswer.addEventListener('click', selectMultipleElement);
     }
     menuSection.append(bookTitle);
-
-    // this will have to be Genki 2 but we aren't there justttt yet
 
     inputOption = document.createElement('p');
     inputOption.setAttribute('id', 'questionTitle');
@@ -102,13 +94,99 @@ function createGenkiMenu(answers) {
     createSubmitButton();
 }
 
+function createQuizPage() {
+    // sets the top part of the quiz page 
+    topQuiz = document.createElement('div');
+    topQuiz.setAttribute('id', 'topQuiz')
+
+    home = document.createElement('button');
+    home.setAttribute('id','homeButton');
+    home.innerText = "home"
+    topQuiz.append(home)
+
+    form = document.createElement('p');
+    form.setAttribute('id', 'formTitle');
+    topQuiz.append(form)
+
+    tutorial = document.createElement('button');
+    tutorial.setAttribute('id','tutorialButton');
+    tutorial.innerText = "tutorial"
+    topQuiz.append(tutorial)
+    bodySection.append(topQuiz)
+
+    // add in the target value
+    mainBlock = document.createElement('div');
+    mainBlock.setAttribute('id', 'mainBlock');
+
+    superScript = document.createElement('span');
+    superScript.setAttribute('id', 'superScript');
+    mainBlock.append(superScript);
+
+    kanjiBlock = document.createElement('span');
+    kanjiBlock.setAttribute('id', 'kanjiBlock');
+    mainBlock.append(kanjiBlock);
+
+    translated = document.createElement('span');
+    translated.setAttribute('id', 'translated');
+    mainBlock.append(translated);
+    bodySection.append(mainBlock)
+
+
+    // add in the user value inputs 
+    inputBox = document.createElement('div');
+    inputBox.setAttribute('id', 'inputBox');
+
+    clearButton = document.createElement('button');
+    clearButton.setAttribute('id', 'clearButton');
+    clearButton.innerText = "clear"
+    inputBox.append(clearButton)
+
+    for(var i = 0; i++; i< 5){
+        createInputTiles(inputBox)
+    }
+
+    bodySection.append(inputBox)
+}
+
+// need to have this separate because the input tiles will be dynamically rendered each time i think
+function createInputTiles(parentNode) {
+    inputTiles = document.createElement('input');
+    inputTiles.setAttribute('class', 'inputTiles');
+
+    inputTiles.addEventListener("keydown", e => {
+        console.log(e.keycode)
+        console.log(e.code)
+        switch (e.keyCode) {
+            // this is a backspace
+            case 8:
+              // some code here…
+              alert('backspace registered')
+              break;
+            //   this is a delete
+            case 46:
+                alert('delete registered')
+                break;
+            // we need one for taking in the values 
+            // like if the keydown is an 'i' then we take in an i, yaa knowww
+            // case "ArrowDown":
+            //   // some code here…
+            //   break;
+          }
+    })
+    parentNode.append(inputTiles)
+}
+
+function createResultsPage() {
+
+}
+
 function createSubmitButton() {
     submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
     submitButton.innerHTML = 'submit';
     menuSection.append(submitButton);
 
-    submitButton.addEventListener("click", submitInfo);
+    submitButton.addEventListener("click", e => {submitInfo(e)});
 }
 
 function updateStorage(nextPage, prevPage)
@@ -200,6 +278,7 @@ function createMenu(question, answers) {
 }
 
 function submitInfo(Event){
+    // Event.preventdefault()
     const selected = document.querySelectorAll('#questionAnswer[selected="true"]');
     const newList = [];
 
@@ -260,3 +339,5 @@ function selectMultipleElement(Event) {
 // })
 
 createMenu('How would you like to learn?', howToStudy);
+
+// createQuizPage()
