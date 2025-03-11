@@ -8,6 +8,8 @@ const howToStudy = ['Follow a Course', "Build your Own"];
 const verbForms = ['Te Form', 'Present Affirmative', 'Present Negative', 'Past Affirmative', 'Past Negative', 'Long Form', 'Short Form'];
 const adjectiveForms = ['Na', 'I'];
 
+var currentElement = "";
+
 function createButtons(name, section, onClickFunc) {
     const button = document.createElement('button');
     button.setAttribute('id', name);
@@ -220,6 +222,7 @@ function createQuizPage() {
             regularCharacter = document.createElement('div');
             regularCharacter.setAttribute('class', item == "" ? 'emptyTiles': 'activeTiles');
             regularCharacter.innerHTML = item
+            regularCharacter.addEventListener('click', e => updateInput(e))
             characterColumn.append(regularCharacter)
         })
 
@@ -240,31 +243,50 @@ function createQuizPage() {
 }
 
 function clearValues(){
-    console.log('mama mia u have cleared this')
+    parentComponent = document.querySelector('#inputBox').children;
+    for(var i = 0; i < parentComponent.length; i++){
+        if(parentComponent[i].nodeName == "INPUT"){
+            parentComponent[i].value = ""
+        }
+    }
 }
 
 function submitValues() {
+
     console.log('mama mia !')
+}
+
+function updateInput(event) {
+    const target = document.getElementById(currentElement.id)
+    target.value = event.target.innerHTML
+}
+
+function setId(id) {
+    console.log('id', id)
+    currentElement = id;
 }
 
 // need to have this separate because the input tiles will be dynamically rendered each time i think
 function createInputTiles(value) {
     inputTiles = document.createElement('input');
     inputTiles.setAttribute('class', 'inputTiles');
+    inputTiles.setAttribute('id', `${Math.random()}`)
     inputTiles.value = value
 
+    inputTiles.addEventListener("click", (e) => {
+        setId(e.target)
+    })
+
     inputTiles.addEventListener("keydown", e => {
-        console.log(e.keycode)
-        console.log(e.code)
         switch (e.keyCode) {
             // this is a backspace
             case 8:
               // some code here…
-              alert('backspace registered')
+                
               break;
             //   this is a delete
             case 46:
-                alert('delete registered')
+                
                 break;
             // we need one for taking in the values 
             // like if the keydown is an 'i' then we take in an i, yaa knowww
