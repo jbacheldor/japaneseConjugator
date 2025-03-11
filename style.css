@@ -335,3 +335,65 @@ input.inputTiles {
 div#tileWrapper {
     background-color: #A7D073
 }
+
+/* da instructions */
+
+span#instruction {
+    font-size: small;
+}
+
+div#specialCharacters {
+    background-color: #5D8D51;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+div.characterColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div#regularCharacters {
+    background-color: #A7D073;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+div.activeTiles {
+    background-color: #FEFCC8;
+    text-align: center;
+    margin: 5px;
+    padding-top: 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: large;
+    height: 30px;
+    width: 35px;
+}
+
+div.emptyTiles {
+    margin: 5px;
+    background-color: #5D8D51;
+    border-radius: 10px;
+    font-size: large;
+    height: 35px;
+    width: 35px;
+}
+
+div.characterColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+div.activeTiles:hover {
+    cursor: pointer;
+    background-color: #eeecbc;
+}

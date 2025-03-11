@@ -93,6 +93,11 @@ function createGenkiMenu(answers) {
 }
 
 function createQuizPage() {
+    // u must remove the input tester body
+    background = document.querySelector('#background');
+    background.style.backgroundImage = "url(./svgs/Background_Quiz.svg)";
+    background.removeChild(document.querySelector("#header"));
+
     // sets the top part of the quiz page 
     topQuiz = document.createElement('div');
     topQuiz.setAttribute('id', 'topQuiz')
@@ -111,7 +116,7 @@ function createQuizPage() {
     tutorial.setAttribute('id','tutorialButton');
     tutorial.innerText = "tutorial"
     topQuiz.append(tutorial)
-    menuSection.append(topQuiz)
+    bodySection.append(topQuiz)
 
     // add in the target value
     mainBlock = document.createElement('div');
@@ -131,7 +136,7 @@ function createQuizPage() {
     translated.setAttribute('id', 'translated');
     translated.innerHTML = "v. to eat"
     mainBlock.append(translated);
-    menuSection.append(mainBlock)
+    bodySection.append(mainBlock)
 
 
     // add in the user value inputs 
@@ -147,13 +152,12 @@ function createQuizPage() {
     clearButton = document.createElement('button');
     clearButton.setAttribute('id', 'clearButton');
     clearButton.innerText = "clear"
+    clearButton.addEventListener('click', clearValues)
     inputBox.append(clearButton)
-    // menuSection.append(inputContainer)
+
 
     var listOfTiles = ["た", "べ", "ま", "す"]
 
-    // tileWrapper = document.createElement('div')
-    // tileWrapper.setAttribute('id', 'inputTiles');
     
     for(let i = 0; i < listOfTiles.length; i++){
         inputBox.append(createInputTiles(listOfTiles[i]))
@@ -161,7 +165,80 @@ function createQuizPage() {
 
     inputContainer.append(inputBox)
 
-    menuSection.append(inputContainer)
+    bodySection.append(inputContainer)
+
+    // now we need the input button-y section
+
+    instruction = document.createElement('span')
+    instruction.setAttribute('id', 'instruction')
+    instruction.innerHTML = "type or select from below"
+    bodySection.append(instruction)
+
+    // set the special characters
+
+    specialCharacters = document.createElement('div');
+    specialCharacters.setAttribute('id', 'specialCharacters');
+
+    var specialCharactersList = ["ゃ", "ゅ", "ょ", "ゅ", "っ", "ー", "゛"]
+
+    for(let i = 0; i < specialCharactersList.length; i++){
+        specialCharacter = document.createElement('div');
+        specialCharacter.setAttribute('class', 'activeTiles');
+        specialCharacter.innerHTML = specialCharactersList[i]
+        specialCharacters.append(specialCharacter)
+    }
+
+    bodySection.append(specialCharacters)
+
+    // set the non-special characters
+    var regularCharactersList = [
+        ["あ", "い", "う", "お", "え"],
+        ["か", "き", "く", "こ", "け"],
+        ["さ", "し", "す", "そ", "せ"],
+        ["た", "つ", "ち", "と", "て"],
+        ["な", "に", "ぬ", "の", "ね"], 
+        ["は", "ひ", "ふ", "ほ", "へ"],
+        ["ま", "み", "む", "も", "め"],
+        ["や", "", "ゆ", "よ", ""],
+        ["ら", "り", "る", "ろ", "れ"],
+        ["わ", "ん", "", "を", ""]
+    ]
+    regularCharacters = document.createElement('div');
+    regularCharacters.setAttribute('id', 'regularCharacters');
+
+    regularCharactersList.forEach((column)=> {
+        characterColumn = document.createElement('div');
+        characterColumn.setAttribute('class', 'characterColumn');
+
+        column.forEach((item) => {
+            regularCharacter = document.createElement('div');
+            regularCharacter.setAttribute('class', item == "" ? 'emptyTiles': 'activeTiles');
+            regularCharacter.innerHTML = item
+            characterColumn.append(regularCharacter)
+        })
+
+        regularCharacters.append(characterColumn)
+    })
+
+    bodySection.append(regularCharacters)
+
+    // submit button
+
+    submitButton = document.createElement('button');
+    submitButton.setAttribute('id', 'submit');
+    submitButton.innerHTML = "submit"
+    submitButton.addEventListener("click", submitValues)
+
+    bodySection.append(submitButton)
+    
+}
+
+function clearValues(){
+    console.log('mama mia u have cleared this')
+}
+
+function submitValues() {
+    console.log('mama mia !')
 }
 
 // need to have this separate because the input tiles will be dynamically rendered each time i think
