@@ -122,20 +122,31 @@ function createQuizPage() {
     mainBlock = document.createElement('div');
     mainBlock.setAttribute('id', 'mainBlock');
 
+    centerBlock = document.createElement('div');
+    centerBlock.setAttribute('id', 'centerBlock');
+
+    extraBlock = document.createElement('span');
+    extraBlock.setAttribute('id', 'extraBlock');
+    centerBlock.append(extraBlock);
+
     superScript = document.createElement('span');
     superScript.setAttribute('id', 'superScript');
     superScript.innerHTML = "た"
-    mainBlock.append(superScript);
+    centerBlock.append(superScript);
+    
 
     kanjiBlock = document.createElement('span');
     kanjiBlock.setAttribute('id', 'kanjiBlock');
     kanjiBlock.innerHTML = "食べる"
-    mainBlock.append(kanjiBlock);
+    centerBlock.append(kanjiBlock);
+    // centerBlock.style.width = `${kanjiBlock.innerHTML.length*20}px`
+    mainBlock.append(centerBlock);
 
     translated = document.createElement('span');
     translated.setAttribute('id', 'translated');
     translated.innerHTML = "v. to eat"
     mainBlock.append(translated);
+
     bodySection.append(mainBlock)
 
 

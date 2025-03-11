@@ -257,6 +257,9 @@ div#topQuiz {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: space-between;
 }
 
 div#topQuiz > button {
@@ -269,19 +272,37 @@ div#topQuiz > button {
     margin: 0px 20px;
 }
 
+div#centerBlock {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: flex-start;
+}
+
 div#mainBlock {
     background-color: #A7D073;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     padding: 5px 20px;
     margin-top: 15px;
     margin-bottom: 5px;
+    width: 60%;
+    align-items: center;
 }
 
-div#mainBlock > span#superScript {
-    color: rgb(0,0,0, 45%)
+span#translated {
+    display: flex;
+    justify-content: center;
+}
+
+span#extraBlock {
+    height: 20px;
+}
+
+div#centerBlock > span#superScript {
+    color: rgb(0,0,0, 45%);
+    position: absolute;
 }
 
 div#inputBox {
