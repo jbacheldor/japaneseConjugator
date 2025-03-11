@@ -262,6 +262,14 @@ function updateInput(event) {
 }
 
 function setId(id) {
+
+    id.setAttribute('selected', "true");
+
+    if(currentElement){
+        prevElement = document.getElementById(currentElement.id);
+        prevElement.removeAttribute('selected');
+    }
+
     console.log('id', id)
     currentElement = id;
 }
@@ -278,16 +286,26 @@ function createInputTiles(value) {
     })
 
     inputTiles.addEventListener("keydown", e => {
+        focusElement = document.getElementById(currentElement.id)
         switch (e.keyCode) {
             // this is a backspace
-            case 8:
-              // some code here…
-                
-              break;
-            //   this is a delete
             case 46:
-                
+              // some code here…
+            //   this is a delete
+            case 8:
+                if(focusElement.value == ""){
+                    if(focusElement.previousElementSibling != null){
+                        setId(focusElement.previousElementSibling)
+                        focusElement.previousElementSibling.value = ""
+                    }
+                  }
                 break;
+            // key tabs girl 
+            case 9:
+                if(focusElement.nextElementSibling != null){
+                    setId(focusElement.nextElementSibling)
+                }
+
             // we need one for taking in the values 
             // like if the keydown is an 'i' then we take in an i, yaa knowww
             // case "ArrowDown":

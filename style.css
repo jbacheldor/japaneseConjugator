@@ -340,6 +340,10 @@ input.inputTiles {
     font-size: x-large;
 }
 
+input.inputTiles[selected=true]{
+    background-color: #5D8D51;
+}
+
 #containerInputBox {
     position: relative;
     width: 100%;
