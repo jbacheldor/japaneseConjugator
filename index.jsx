@@ -10,6 +10,8 @@ const adjectiveForms = ['Na', 'I'];
 
 var currentElement = "";
 
+let answers = []
+
 function createButtons(name, section, onClickFunc) {
     const button = document.createElement('button');
     button.setAttribute('id', name);
@@ -252,8 +254,12 @@ function clearValues(){
 }
 
 function submitValues() {
-
-    console.log('mama mia !')
+    answers.append({
+        word: '',
+        form: '',
+        answer: '',
+        type: ''
+    })
 }
 
 function updateInput(event) {
@@ -285,51 +291,270 @@ function createInputTiles(value) {
         setId(e.target)
     })
 
-    inputTiles.addEventListener("keydown", e => {
-        focusElement = document.getElementById(currentElement.id)
-        e.preventDefault()
-        switch (e.keyCode) {
-            // this is a backspace
-            case 46:
-            //   this is a delete
-            case 8:
-                if(focusElement.value == ""){
-                    if(focusElement.previousElementSibling != null){
-                        setId(focusElement.previousElementSibling)
-                        focusElement.previousElementSibling.value = ""
-                    }
-                  }
-                else {
-                    focusElement.value = ""
-                }
-                break;
-            // key tabs girl 
-            case 9:
-                if(focusElement.nextElementSibling != null){
-                    setId(focusElement.nextElementSibling)
-                }
-                break;
-            // going to the left
-            case 37:
-                if(focusElement.previousElementSibling != null){
-                    setId(focusElement.previousElementSibling)
-                }
-                break;
-            case 39:
-                if(focusElement.nextElementSibling != null){
-                    setId(focusElement.nextElementSibling)
-                }
-                break;
-
-            // we need one for taking in the values 
-            // like if the keydown is an 'i' then we take in an i, yaa knowww
-            // case "ArrowDown":
-            //   // some code here…
-            //   break;
-          }
-    })
+    inputTiles.addEventListener("keydown", e => letterInput(e))
     return inputTiles
 }
+
+
+function letterInput(e) {
+    focusElement = document.getElementById(currentElement.id)
+    e.preventDefault()
+    switch (e.keyCode) {
+        // this is a backspace
+        case 46:
+        //   this is a delete
+        case 8:
+            if(focusElement.value == ""){
+                if(focusElement.previousElementSibling != null){
+                    setId(focusElement.previousElementSibling)
+                    focusElement.previousElementSibling.value = ""
+                }
+              }
+            else {
+                focusElement.value = ""
+            }
+            break;
+        // key tabs & enter girl
+        case 13: 
+        case 9:
+            if(focusElement.nextElementSibling != null){
+                setId(focusElement.nextElementSibling)
+            }
+            break;
+        // going to the left
+        case 37:
+            if(focusElement.previousElementSibling != null){
+                setId(focusElement.previousElementSibling)
+            }
+            break;
+        // going to the right
+        case 39:
+            if(focusElement.nextElementSibling != null){
+                setId(focusElement.nextElementSibling)
+            }
+            break;
+        
+        // for k
+        case 75:
+        // case for r
+        case 82:
+        // for y
+        case 89:
+        // for m
+        case 77:
+        // for w
+        case 87:
+        // for t
+        case 84:
+            focusElement.value = e.key
+            break;
+
+        // s 
+        case 83:
+            if(focusElement.value == "t") focusElement.value = 'ts'
+            else focusElement.value = e.key
+            break;
+
+        // for h
+        case 72:
+            if(focusElement.value == "c") focusElement.value = 'ch'
+            else if(focusElement.value == "s") focusElement.value = 'sh'
+            else focusElement.value = e.key
+            break;
+        // vowel timmemeeeeee
+
+
+
+        // case for i
+        case 73:
+            // then we need to see if we can compound
+            if(focusElement.value.length == 1){
+                switch(focusElement.value) {
+                    case 'k':
+                        focusElement.value = 'き'
+                        break;
+                    case 'ん':
+                    case 'n':
+                        focusElement.value = 'に'
+                        break;
+                    case 'h':
+                        focusElement.value = 'ひ'
+                        break;  
+                    case 'h':
+                        focusElement.value = 'み'
+                        break;  
+                    case 'r':
+                        focusElement.value = 'り'
+                        break;  
+                }
+            }
+            else if(focusElement.value.length == 0){
+                focusElement.value = 'い'
+            }
+            else if(focusElement.value.length > 1)
+            {
+                if(focusElement.value == "ch") focusElement.value = 'ち'
+                else if(focusElement.value == "sh") focusElement.value = 'し'
+            }
+            break;
+        // case for a
+        case 65:
+            if(focusElement.value.length == 1){
+                switch(focusElement.value) {
+                    case 'k':
+                        focusElement.value = 'か'
+                        break;
+                    case 's':
+                        focusElement.value = 'さ'
+                        break;
+                    case 't':
+                        focusElement.value = 'た'
+                        break;
+                    case 'ん':
+                    case 'n':
+                        focusElement.value = 'な'
+                        break;
+                    case 'h':
+                        focusElement.value = 'は'
+                        break;
+                    case 'm':
+                        focusElement.value = 'ま'
+                        break;  
+                    case 'y':
+                        focusElement.value = 'や'
+                        break;  
+                    case 'r':
+                        focusElement.value = 'ら'
+                        break;
+                    case 'w':
+                        focusElement.value = 'わ'
+                        break;  
+                }
+            } 
+            else if(focusElement.value.length == 0){
+                focusElement.value = 'あ'
+            }
+            break;
+        // case for o
+        case 79:
+            if(focusElement.value.length == 1){
+                switch(focusElement.value) {
+                    case 'k':
+                        focusElement.value = 'こ'
+                        break;
+                    case 's':
+                        focusElement.value = 'そ'
+                        break;
+                    case 't':
+                        focusElement.value = 'と'
+                        break;
+                    case 'ん':
+                    case 'n':
+                        focusElement.value = 'の'
+                        break;
+                    case 'h':
+                        focusElement.value = 'ほ'
+                        break;
+                    case 'm':
+                        focusElement.value = 'も'
+                        break;  
+                    case 'y':
+                        focusElement.value = 'よ'
+                        break;  
+                    case 'r':
+                        focusElement.value = 'ろ'
+                        break;
+                    case 'w':
+                        focusElement.value = 'を'
+                        break;  
+                }
+            } 
+            else if(focusElement.value.length == 0){
+                focusElement.value = 'お'
+            }
+            break;
+        // case for u
+        case 85:
+            if(focusElement.value.length == 1){
+                switch(focusElement.value) {
+                    case 'k':
+                        focusElement.value = 'く'
+                        break;
+                    case 's':
+                        focusElement.value = 'す'
+                        break;
+                    case 't':
+                        focusElement.value = 'ち'
+                        break;
+                    case 'ん':
+                    case 'n':
+                        focusElement.value = 'ぬ'
+                        break;
+                    case 'f':
+                        focusElement.value = 'ふ'
+                        break;
+                    case 'm':
+                        focusElement.value = 'む'
+                        break;  
+                    case 'y':
+                        focusElement.value = 'ゆ'
+                        break;  
+                    case 'r':
+                        focusElement.value = 'る'
+                        break;
+                    case 'w':
+                        focusElement.value = 'を'
+                        break;  
+                }
+            } 
+            else if(focusElement.value.length == 0){
+                focusElement.value = 'う'
+            }
+            else if(focusElement.value.length > 1 && focusElement.value == "ts"){
+                focusElement.value = 'つ'
+            }
+            break;
+        // case for e
+        case 69:
+            if(focusElement.value.length == 1){
+                switch(focusElement.value) {
+                    case 'k':
+                        focusElement.value = 'け'
+                        break;
+                    case 's':
+                        focusElement.value = 'せ'
+                        break;
+                    case 't':
+                        focusElement.value = 'て'
+                        break;
+                    case 'ん':
+                    case 'n':
+                        focusElement.value = 'ね'
+                        break;
+                    case 'h':
+                        focusElement.value = 'へ'
+                        break;
+                    case 'm':
+                        focusElement.value = 'め'
+                        break;  
+                    case 'r':
+                        focusElement.value = 'れ'
+                        break;
+                }
+            } 
+            else if(focusElement.value.length == 0){
+                focusElement.value = 'え'
+            }
+            break;
+        // case for n 
+        case 78:
+            focusElement.value = 'ん'
+            break;
+        default:
+            focusElement.value = e.key
+      }
+}
+
 
 function createResultsPage() {
 
