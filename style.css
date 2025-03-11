@@ -344,6 +344,11 @@ input.inputTiles[selected=true]{
     background-color: #5D8D51;
 }
 
+input.inputTiles:focus {
+    outline: none;
+    caret-color: transparent;
+}
+
 #containerInputBox {
     position: relative;
     width: 100%;

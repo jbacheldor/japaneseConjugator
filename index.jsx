@@ -287,10 +287,10 @@ function createInputTiles(value) {
 
     inputTiles.addEventListener("keydown", e => {
         focusElement = document.getElementById(currentElement.id)
+        e.preventDefault()
         switch (e.keyCode) {
             // this is a backspace
             case 46:
-              // some code here…
             //   this is a delete
             case 8:
                 if(focusElement.value == ""){
@@ -299,12 +299,27 @@ function createInputTiles(value) {
                         focusElement.previousElementSibling.value = ""
                     }
                   }
+                else {
+                    focusElement.value = ""
+                }
                 break;
             // key tabs girl 
             case 9:
                 if(focusElement.nextElementSibling != null){
                     setId(focusElement.nextElementSibling)
                 }
+                break;
+            // going to the left
+            case 37:
+                if(focusElement.previousElementSibling != null){
+                    setId(focusElement.previousElementSibling)
+                }
+                break;
+            case 39:
+                if(focusElement.nextElementSibling != null){
+                    setId(focusElement.nextElementSibling)
+                }
+                break;
 
             // we need one for taking in the values 
             // like if the keydown is an 'i' then we take in an i, yaa knowww
