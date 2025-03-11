@@ -296,13 +296,8 @@ span#translated {
     justify-content: center;
 }
 
-span#extraBlock {
-    height: 20px;
-}
-
 div#centerBlock > span#superScript {
     color: rgb(0,0,0, 45%);
-    position: absolute;
 }
 
 div#inputBox {

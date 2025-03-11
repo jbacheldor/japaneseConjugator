@@ -125,15 +125,10 @@ function createQuizPage() {
     centerBlock = document.createElement('div');
     centerBlock.setAttribute('id', 'centerBlock');
 
-    extraBlock = document.createElement('span');
-    extraBlock.setAttribute('id', 'extraBlock');
-    centerBlock.append(extraBlock);
-
     superScript = document.createElement('span');
     superScript.setAttribute('id', 'superScript');
     superScript.innerHTML = "た"
     centerBlock.append(superScript);
-    
 
     kanjiBlock = document.createElement('span');
     kanjiBlock.setAttribute('id', 'kanjiBlock');
