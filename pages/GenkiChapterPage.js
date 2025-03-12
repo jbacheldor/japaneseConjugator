@@ -40,5 +40,20 @@ export function createGenkiMenu(answers) {
     }
     menuSection.append(bookTitle);
 
-    createSubmitButton();
+    createSubmitButton(getConjugations);
+}
+
+async function getConjugations() {
+    let data = {}
+    try {
+        await fetch(`http://localhost:8000/genkiChapters?chapters=4, 3, 2, 5`)
+            .then((res) => {
+                if (res.status == 200) data = res.body
+            }).catch((error) => {
+                console.log(error)
+            })
+    } catch (error) {
+        console.log('error', error)
+    }
+    return data
 }

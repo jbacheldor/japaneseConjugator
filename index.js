@@ -63,13 +63,20 @@ function createResultsPage() {
 
 }
 
-export function createSubmitButton() {
+export function createSubmitButton(callbackFunction) {
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
     submitButton.innerHTML = 'submit';
     menuSection.append(submitButton);
 
-    submitButton.addEventListener("click", e => { submitInfo(e) });
+    submitButton.addEventListener("click", e => {
+        if (callbackFunction) {
+            callbackFunction();
+            submitInfo(e);
+        } else {
+            submitInfo(e)
+        }
+    });
 }
 
 function updateStorage(nextPage, prevPage) {

@@ -365,7 +365,6 @@ export function keysFunction(e, focusElement, setId) {
 }
 
 
-
 export function createQuizPage() {
     // u must remove the input tester body
     const bodySection = document.querySelector(".bodySection");
