@@ -1,4 +1,5 @@
 import { createQuizPage } from "./pages/QuizPage.js";
+import { createGenkiMenu } from "./pages/GenkiChapterPage.js";
 
 const body = document.querySelector("#body");
 const menuSection = document.querySelector(".input-tester");
@@ -9,10 +10,6 @@ const typesOfSpeech = ['verbs', 'adverbs'];
 const howToStudy = ['Follow a Course', "Build your Own"];
 const verbForms = ['Te Form', 'Present Affirmative', 'Present Negative', 'Past Affirmative', 'Past Negative', 'Long Form', 'Short Form'];
 const adjectiveForms = ['Na', 'I'];
-
-// let currentElement = "";
-
-// let answerValues = []
 
 function createButtons(name, section, onClickFunc) {
     const button = document.createElement('button');
@@ -62,52 +59,11 @@ function goBack() {
     figureOutPage(pageNum);
 }
 
-function createGenkiMenu(answers) {
-    // genki 1 and genki 2
-    let bookTitle = document.createElement('div');
-    bookTitle.setAttribute('id', 'bookTitle');
-    for (let i = 0; i < answers.length; i++) {
-        let questionAnswer = document.createElement('button');
-        if (i % 2 == 0) {
-            questionAnswer.setAttribute('id', 'bookAnswerEven');
-        } else {
-            questionAnswer.setAttribute('id', 'bookAnswerOdd');
-        }
-        questionAnswer.innerHTML = answers[i];
-        bookTitle.append(questionAnswer);
-        questionAnswer.addEventListener('click', selectMultipleElement);
-    }
-    menuSection.append(bookTitle);
-
-    let inputOption = document.createElement('p');
-    inputOption.setAttribute('id', 'questionTitle');
-    inputOption.innerHTML = 'Genki 2 Chapters';
-    menuSection.append(inputOption);
-
-    bookTitle = document.createElement('p');
-    bookTitle.setAttribute('id', 'bookTitle');
-    for (let i = 0; i < answers.length; i++) {
-        let questionAnswer = document.createElement('button');
-        if (i % 2 == 0) {
-            questionAnswer.setAttribute('id', 'bookAnswerEven');
-        } else {
-            questionAnswer.setAttribute('id', 'bookAnswerOdd');
-        }
-        questionAnswer.innerHTML = answers[i];
-        bookTitle.append(questionAnswer);
-        questionAnswer.addEventListener('click', selectMultipleElement);
-    }
-    menuSection.append(bookTitle);
-
-    createSubmitButton();
-}
-
-
 function createResultsPage() {
 
 }
 
-function createSubmitButton() {
+export function createSubmitButton() {
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
     submitButton.innerHTML = 'submit';
@@ -151,6 +107,8 @@ function figureOutPage(pageNumber) {
             //     updateStorage(0, 3);
             //     createMenu('JPLT Tests', ['N1', 'N2', 'N3', 'N4', 'N5']);
             //     break;
+        case 6:
+            updateStorage(0, 4);
         default:
             updateStorage(0, 0);
             createMenu('How would you like to learn?', howToStudy);
@@ -219,6 +177,8 @@ function submitInfo(Event) {
         figureOutPage(4);
     } else if (newList.includes('jplt')) {
         figureOutPage(5);
+    } else {
+        createQuizPage();
     }
 }
 // verb forms
@@ -244,7 +204,7 @@ function selectSingleElement(Event) {
 }
 
 // this is for when you can select multiple options on the screen
-function selectMultipleElement(Event) {
+export function selectMultipleElement(Event) {
     if (Event.target.getAttribute('selected')) {
         Event.target.removeAttribute('selected');
     } else {
@@ -252,6 +212,6 @@ function selectMultipleElement(Event) {
     }
 }
 
-// createMenu('How would you like to learn?', howToStudy);
+createMenu('How would you like to learn?', howToStudy);
 
-createQuizPage()
+// createQuizPage()

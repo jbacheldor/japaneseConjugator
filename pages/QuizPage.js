@@ -351,7 +351,8 @@ export function keysFunction(e, focusElement, setId) {
 
             // p
         case 80:
-
+            focusElement.value = e.key
+            break;
             // we got z
             // we got g
             // we got p
@@ -360,9 +361,6 @@ export function keysFunction(e, focusElement, setId) {
             // we got pyu
             // we got pyo?
             // we also have ji man
-
-        default:
-            focusElement.value = e.key
     }
 }
 
@@ -373,6 +371,10 @@ export function createQuizPage() {
     const bodySection = document.querySelector(".bodySection");
     const inputTester = bodySection.querySelector(".input-tester");
     bodySection.removeChild(inputTester)
+
+    const footerSection = document.querySelector("#footer-section");
+    const body = document.querySelector(".bodySection");
+    if (footerSection) body.removeChild(footerSection)
 
     // change background
     let background = document.querySelector('#background');
