@@ -9,11 +9,7 @@ export function createGenkiMenu(answers) {
     bookTitle.setAttribute('id', 'bookTitle');
     for (let i = 0; i < answers.length; i++) {
         let questionAnswer = document.createElement('button');
-        if (i % 2 == 0) {
-            questionAnswer.setAttribute('id', 'bookAnswerEven');
-        } else {
-            questionAnswer.setAttribute('id', 'bookAnswerOdd');
-        }
+        questionAnswer.setAttribute('id', 'bookAnswer');
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
         questionAnswer.addEventListener('click', selectMultipleElement);
@@ -29,26 +25,33 @@ export function createGenkiMenu(answers) {
     bookTitle.setAttribute('id', 'bookTitle');
     for (let i = 0; i < answers.length; i++) {
         let questionAnswer = document.createElement('button');
-        if (i % 2 == 0) {
-            questionAnswer.setAttribute('id', 'bookAnswerEven');
-        } else {
-            questionAnswer.setAttribute('id', 'bookAnswerOdd');
-        }
+        questionAnswer.setAttribute('id', 'bookAnswer');
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
         questionAnswer.addEventListener('click', selectMultipleElement);
     }
     menuSection.append(bookTitle);
 
-    createSubmitButton(getConjugations);
+    const bodySection = document.querySelector('.bodySection');
+
+    createSubmitButton(getConjugations, bodySection);
 }
 
 async function getConjugations() {
+    const chapters = document.querySelectorAll('#bookAnswer[selected="true"]');
+    let chapterList = ""
+    chapters.forEach((chapter) => {
+        if (chapterList == "") chapterList = chapter.innerHTML
+        else chapterList = chapterList + ", " + chapter.innerHTML
+
+    })
     let data = {}
     try {
-        await fetch(`http://localhost:8000/genkiChapters?chapters=4, 3, 2, 5`)
+        await fetch(`http://localhost:8000/genkiChapters?` + new URLSearchParams({
+                chapters: chapterList,
+            }).toString())
             .then((res) => {
-                if (res.status == 200) data = res.body
+                if (res.status == 200) data = res.json();
             }).catch((error) => {
                 console.log(error)
             })

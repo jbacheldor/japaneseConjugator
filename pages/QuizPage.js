@@ -1,6 +1,10 @@
 let currentElement = "";
 
-let answerValues = []
+let answerValues = [];
+let totalAmt = 0;
+let count = 0;
+let remainingAmt = 0;
+
 
 export function clearValues() {
     let parentComponent = document.querySelector('#inputBox').children;
@@ -365,13 +369,20 @@ export function keysFunction(e, focusElement, setId) {
 }
 
 
-export function createQuizPage() {
-    // u must remove the input tester body
+export function createQuizPage(data) {
+    answerValues = data;
+    totalAmt = data.length;
+    remainingAmt = count + 1;
+    console.log('data', data)
+        // u must remove the input tester body
     const bodySection = document.querySelector(".bodySection");
     const inputTester = bodySection.querySelector(".input-tester");
     bodySection.removeChild(inputTester)
 
-    const footerSection = document.querySelector("#footer-section");
+    const submit = bodySection.querySelector("#submit");
+    bodySection.removeChild(submit)
+
+    const footerSection = document.querySelector("#footerSection");
     const body = document.querySelector(".bodySection");
     if (footerSection) body.removeChild(footerSection)
 
@@ -407,9 +418,9 @@ export function createQuizPage() {
     // add in remaining amount
     let remaining = document.createElement('div');
     remaining.setAttribute('id', 'remainingQuestions');
-    remaining.innerHTML = `remaining / total`
+    remaining.innerHTML = `${remainingAmt} / ${totalAmt}`
 
-    mainBlock.append(remaining);
+    bodySection.append(remaining);
 
     let centerBlock = document.createElement('div');
     centerBlock.setAttribute('id', 'centerBlock');
@@ -421,14 +432,14 @@ export function createQuizPage() {
 
     let kanjiBlock = document.createElement('span');
     kanjiBlock.setAttribute('id', 'kanjiBlock');
-    kanjiBlock.innerHTML = "食べる"
+    kanjiBlock.innerHTML = data[count].word
     centerBlock.append(kanjiBlock);
     // centerBlock.style.width = `${kanjiBlock.innerHTML.length*20}px`
     mainBlock.append(centerBlock);
 
     let translated = document.createElement('span');
     translated.setAttribute('id', 'translated');
-    translated.innerHTML = "v. to eat"
+    translated.innerHTML = data[count].word
     mainBlock.append(translated);
 
     bodySection.append(mainBlock)
@@ -442,16 +453,13 @@ export function createQuizPage() {
 
     inputContainer.append(inputBox);
 
-
     let clearButton = document.createElement('button');
     clearButton.setAttribute('id', 'clearButton');
     clearButton.innerText = "clear"
     clearButton.addEventListener('click', clearValues)
     inputBox.append(clearButton)
 
-
     let listOfTiles = ["た", "べ", "ま", "す"]
-
 
     for (let i = 0; i < listOfTiles.length; i++) {
         inputBox.append(createInputTiles(listOfTiles[i]))
@@ -521,13 +529,43 @@ export function createQuizPage() {
 
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
-    submitButton.innerHTML = "submit"
-    submitButton.addEventListener("click", submitValues)
+    submitButton.innerHTML = "submit";
+    submitButton.addEventListener("click", createValues);
 
     bodySection.append(submitButton)
 }
 
-function submitValues() {
+function createValues(newValue) {
+    const superScript = document.querySelector("#superScript")
+    const KanjiBlock = document.querySelector("#kanjiBlock")
+    const translated = document.querySelector("#translated")
+    const formBlock = document.querySelector("#formTitle")
+
+    // need to append to answwers
+
+    // need to update the remaining values
+    remainingAmt = +1;
+
+    // need to update the values
+    KanjiBlock.innerHTML = newValue.kanji
+    superScript.innerHTML = newValue.superScript
+    let type = newValue.type == "verb" ? "v. " : "adj. "
+    translated.innerHTML = type + newValue.word
+    formBlock.innerHTML = newValue.form
+
+    removeTiles()
+
+    // also need to delete the existing tiles ! to clear em!
+
+    // maybe we just create a length in here
+    // or reiterate through each
+    inputBox = document.querySelector("#inputBox")
+    inputBox.append(createInputTiles(listOfTiles[i]))
+    word.forEach(() => {
+        inputBox.append(createInputTiles(listOfTiles[i]))
+        createInputTiles()
+    })
+
     answerValues.push({
         word: '',
         form: '',
@@ -535,11 +573,19 @@ function submitValues() {
         type: ''
     })
     console.log('answer values', answerValues)
+    count += 1;
 }
 
 function updateInput(event) {
     const target = document.getElementById(currentElement.id)
     target.value = event.target.innerHTML
+}
+
+function removeTiles() {
+    const tiles = document.querySelectorAll(".inputTiles");
+    tiles.forEach((tile) => {
+        tile.remove()
+    })
 }
 
 

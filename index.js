@@ -22,24 +22,17 @@ function createButtons(name, section, onClickFunc) {
 }
 
 function selectAll(Event) {
-    const answersEven = document.querySelectorAll('#bookAnswerEven');
-    const answersOdd = document.querySelectorAll('#bookAnswerOdd');
+    const bookAnswers = document.querySelectorAll('#bookAnswer');
 
     if (Event.target.getAttribute('selected') === "true") {
         Event.target.removeAttribute('selected');
-        for (let i = 0; i < answersEven.length; i++) {
-            answersEven[i].removeAttribute('selected');
-        }
-        for (let i = 0; i < answersOdd.length; i++) {
-            answersOdd[i].removeAttribute('selected');
+        for (let i = 0; i < bookAnswers.length; i++) {
+            bookAnswers[i].removeAttribute('selected');
         }
     } else {
         Event.target.setAttribute('selected', true);
-        for (let i = 0; i < answersEven.length; i++) {
-            answersEven[i].setAttribute('selected', true);
-        }
-        for (let i = 0; i < answersOdd.length; i++) {
-            answersOdd[i].setAttribute('selected', true);
+        for (let i = 0; i < bookAnswers.length; i++) {
+            bookAnswers[i].setAttribute('selected', true);
         }
     }
 }
@@ -63,16 +56,20 @@ function createResultsPage() {
 
 }
 
-export function createSubmitButton(callbackFunction) {
+export function createSubmitButton(callbackFunction, parentNode) {
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
     submitButton.innerHTML = 'submit';
-    menuSection.append(submitButton);
+    if (parentNode) {
+        parentNode.append(submitButton);
+    } else {
+        menuSection.append(submitButton);
+    }
 
-    submitButton.addEventListener("click", e => {
+    submitButton.addEventListener("click", async(e) => {
         if (callbackFunction) {
-            callbackFunction();
-            submitInfo(e);
+            const data = await callbackFunction();
+            submitInfo(e, data);
         } else {
             submitInfo(e)
         }
@@ -165,7 +162,7 @@ function createMenu(question, answers) {
     }
 }
 
-function submitInfo(Event) {
+function submitInfo(Event, data) {
     // Event.preventdefault()
     const selected = document.querySelectorAll('#questionAnswer[selected="true"]');
     const newList = [];
@@ -185,7 +182,7 @@ function submitInfo(Event) {
     } else if (newList.includes('jplt')) {
         figureOutPage(5);
     } else {
-        createQuizPage();
+        createQuizPage(data);
     }
 }
 // verb forms
