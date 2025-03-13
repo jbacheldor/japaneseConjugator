@@ -4,6 +4,7 @@ let answerValues = [];
 let totalAmt = 0;
 let count = 0;
 let remainingAmt = 0;
+let dataValue = []
 
 
 export function clearValues() {
@@ -370,11 +371,10 @@ export function keysFunction(e, focusElement, setId) {
 
 
 export function createQuizPage(data) {
-    answerValues = data;
+    dataValue = data
     totalAmt = data.length;
     remainingAmt = count + 1;
-    console.log('data', data)
-        // u must remove the input tester body
+    // u must remove the input tester body
     const bodySection = document.querySelector(".bodySection");
     const inputTester = bodySection.querySelector(".input-tester");
     bodySection.removeChild(inputTester)
@@ -462,7 +462,7 @@ export function createQuizPage(data) {
     let listOfTiles = ["た", "べ", "ま", "す"]
 
     for (let i = 0; i < listOfTiles.length; i++) {
-        inputBox.append(createInputTiles(listOfTiles[i]))
+        inputBox.append(createInputTiles())
     }
 
     inputContainer.append(inputBox)
@@ -527,6 +527,12 @@ export function createQuizPage(data) {
 
     // submit button
 
+    let nextButton = document.createElement('button');
+    nextButton.setAttribute('id', 'next');
+    nextButton.innerText = "end_game"
+    nextButton.addEventListener("click", createValues)
+    bodySection.append(nextButton)
+
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
     submitButton.innerHTML = "submit";
@@ -535,7 +541,10 @@ export function createQuizPage(data) {
     bodySection.append(submitButton)
 }
 
-function createValues(newValue) {
+function createValues() {
+    remainingAmt += 1;
+    const newValue = dataValue[count]
+
     const superScript = document.querySelector("#superScript")
     const KanjiBlock = document.querySelector("#kanjiBlock")
     const translated = document.querySelector("#translated")
@@ -544,11 +553,10 @@ function createValues(newValue) {
     // need to append to answwers
 
     // need to update the remaining values
-    remainingAmt = +1;
 
     // need to update the values
-    KanjiBlock.innerHTML = newValue.kanji
-    superScript.innerHTML = newValue.superScript
+    KanjiBlock.innerHTML = newValue.dictionary_form_kanji
+    superScript.innerHTML = newValue.stem_hiragana
     let type = newValue.type == "verb" ? "v. " : "adj. "
     translated.innerHTML = type + newValue.word
     formBlock.innerHTML = newValue.form
@@ -559,12 +567,10 @@ function createValues(newValue) {
 
     // maybe we just create a length in here
     // or reiterate through each
-    inputBox = document.querySelector("#inputBox")
-    inputBox.append(createInputTiles(listOfTiles[i]))
-    word.forEach(() => {
-        inputBox.append(createInputTiles(listOfTiles[i]))
-        createInputTiles()
-    })
+    let inputBox = document.querySelector("#inputBox")
+    for (let i = 0; i < newValue.dictionary_form_kanji.length; i++) {
+        inputBox.append(createInputTiles())
+    }
 
     answerValues.push({
         word: '',
@@ -572,7 +578,7 @@ function createValues(newValue) {
         answer: '',
         type: ''
     })
-    console.log('answer values', answerValues)
+
     count += 1;
 }
 
@@ -590,11 +596,10 @@ function removeTiles() {
 
 
 // need to have this separate because the input tiles will be dynamically rendered each time i think
-function createInputTiles(value) {
+function createInputTiles() {
     let inputTiles = document.createElement('input');
     inputTiles.setAttribute('class', 'inputTiles');
     inputTiles.setAttribute('id', `${Math.random()}`)
-    inputTiles.value = value
 
     inputTiles.addEventListener("click", (e) => {
         setId(e.target)
@@ -621,4 +626,19 @@ function letterInput(e) {
     let focusElement = document.getElementById(currentElement.id)
     e.preventDefault()
     keysFunction(e, focusElement, setId)
+}
+
+async function getResults(answers) {
+    let data = {}
+
+    try {
+        await fetch(`http://localhost:8000/getGenkiResults?`, {
+            method: "POST",
+            body: JSON.stringify(answers),
+        })
+    } catch (error) {
+        console.log('error', error)
+    }
+
+    return data;
 }
