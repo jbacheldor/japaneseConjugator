@@ -402,7 +402,7 @@ export function createQuizPage(data) {
 
     let form = document.createElement('span');
     form.setAttribute('id', 'formTitle');
-    form.innerHTML = "{Form Here}"
+    form.innerHTML = dataValue[count].form
     topQuiz.append(form)
 
     let tutorial = document.createElement('button');
@@ -427,14 +427,13 @@ export function createQuizPage(data) {
 
     let superScript = document.createElement('span');
     superScript.setAttribute('id', 'superScript');
-    superScript.innerHTML = "た"
+    superScript.innerHTML = dataValue[count].stem_hiragana
     centerBlock.append(superScript);
 
     let kanjiBlock = document.createElement('span');
     kanjiBlock.setAttribute('id', 'kanjiBlock');
-    kanjiBlock.innerHTML = data[count].word
+    kanjiBlock.innerHTML = dataValue[count].dictionary_form_kanji
     centerBlock.append(kanjiBlock);
-    // centerBlock.style.width = `${kanjiBlock.innerHTML.length*20}px`
     mainBlock.append(centerBlock);
 
     let translated = document.createElement('span');
@@ -459,9 +458,8 @@ export function createQuizPage(data) {
     clearButton.addEventListener('click', clearValues)
     inputBox.append(clearButton)
 
-    let listOfTiles = ["た", "べ", "ま", "す"]
 
-    for (let i = 0; i < listOfTiles.length; i++) {
+    for (let i = 0; i < dataValue[count][dataValue[count].form].length; i++) {
         inputBox.append(createInputTiles())
     }
 
@@ -542,6 +540,23 @@ export function createQuizPage(data) {
 }
 
 function createValues() {
+
+    // need to save values first
+    let values = document.querySelectorAll(".inputTiles")
+    let answer = ""
+    for (let i = 0; i < values.length; i++) {
+        answer = answer + values[i].value
+    }
+
+    answerValues.push({
+        word: dataValue[count].word,
+        form: dataValue[count].form,
+        answer: answer,
+        type: dataValue[count].type
+    })
+
+    // then we rebuild
+
     remainingAmt += 1;
     const newValue = dataValue[count]
 
@@ -549,8 +564,6 @@ function createValues() {
     const KanjiBlock = document.querySelector("#kanjiBlock")
     const translated = document.querySelector("#translated")
     const formBlock = document.querySelector("#formTitle")
-
-    // need to append to answwers
 
     // need to update the remaining values
 
@@ -568,16 +581,9 @@ function createValues() {
     // maybe we just create a length in here
     // or reiterate through each
     let inputBox = document.querySelector("#inputBox")
-    for (let i = 0; i < newValue.dictionary_form_kanji.length; i++) {
+    for (let i = 0; i < dataValue[count][dataValue[count].form].length; i++) {
         inputBox.append(createInputTiles())
     }
-
-    answerValues.push({
-        word: '',
-        form: '',
-        answer: '',
-        type: ''
-    })
 
     count += 1;
 }
@@ -615,7 +621,7 @@ function setId(id) {
 
     if (currentElement) {
         let prevElement = document.getElementById(currentElement.id);
-        prevElement.removeAttribute('selected');
+        if (prevElement) prevElement.removeAttribute('selected');
     }
 
     currentElement = id;
