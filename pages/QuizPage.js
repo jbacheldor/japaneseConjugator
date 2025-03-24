@@ -3,7 +3,6 @@ let currentElement = "";
 let answerValues = [];
 let totalAmt = 0;
 let count = 0;
-let remainingAmt = 0;
 let dataValue = []
 
 
@@ -402,7 +401,7 @@ export function createQuizPage(data) {
 
     let form = document.createElement('span');
     form.setAttribute('id', 'formTitle');
-    form.innerHTML = dataValue[count].form
+    form.innerHTML = dataValue[count].form.replace(/[_]/g, ' ')
     topQuiz.append(form)
 
     let tutorial = document.createElement('button');
@@ -418,7 +417,7 @@ export function createQuizPage(data) {
     // add in remaining amount
     let remaining = document.createElement('div');
     remaining.setAttribute('id', 'remainingQuestions');
-    remaining.innerHTML = `${remainingAmt} / ${totalAmt}`
+    remaining.innerHTML = `${count + 1} / ${totalAmt}`
 
     bodySection.append(remaining);
 
@@ -527,14 +526,14 @@ export function createQuizPage(data) {
 
     let nextButton = document.createElement('button');
     nextButton.setAttribute('id', 'next');
-    nextButton.innerText = "end_game"
+    nextButton.innerText = "submit"
     nextButton.addEventListener("click", createValues)
     bodySection.append(nextButton)
 
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
-    submitButton.innerHTML = "submit";
-    submitButton.addEventListener("click", createValues);
+    submitButton.innerHTML = "end game";
+    // submitButton.addEventListener("click", createValues);
 
     bodySection.append(submitButton)
 }
@@ -556,9 +555,11 @@ function createValues() {
     })
 
     // then we rebuild
-
-    remainingAmt += 1;
     const newValue = dataValue[count]
+
+    const remainingBlock = document.querySelector("#remainingQuestions")
+    remainingBlock.innerHTML = `${count + 1} / ${totalAmt}`
+
 
     const superScript = document.querySelector("#superScript")
     const KanjiBlock = document.querySelector("#kanjiBlock")
@@ -572,7 +573,7 @@ function createValues() {
     superScript.innerHTML = newValue.stem_hiragana
     let type = newValue.type == "verb" ? "v. " : "adj. "
     translated.innerHTML = type + newValue.word
-    formBlock.innerHTML = newValue.form
+    formBlock.innerHTML = newValue.form.replace(/[_]/g, ' ')
 
     removeTiles()
 

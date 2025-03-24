@@ -1,5 +1,6 @@
 import { createQuizPage } from "./pages/QuizPage.js";
 import { createGenkiMenu } from "./pages/GenkiChapterPage.js";
+import { createResultsPage } from "./pages/ResultsPage.js";
 
 const body = document.querySelector("#body");
 const menuSection = document.querySelector(".input-tester");
@@ -50,10 +51,6 @@ function goBack() {
     const pageNum = sessionStorage.getItem('prevPage');
     menuSection.replaceChildren();
     figureOutPage(pageNum);
-}
-
-function createResultsPage() {
-
 }
 
 export function createSubmitButton(callbackFunction, parentNode) {
@@ -182,6 +179,7 @@ function submitInfo(Event, data) {
     } else if (newList.includes('jplt')) {
         figureOutPage(5);
     } else {
+        // createResultsPage();
         createQuizPage(data);
     }
 }

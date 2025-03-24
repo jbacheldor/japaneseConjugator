@@ -422,3 +422,26 @@ div.activeTiles:hover {
     cursor: pointer;
     background-color: #eeecbc;
 }
+
+
+.star {
+    background-image: url("./svgs/Star.svg");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.star svg path{
+    fill: currentcolor;
+  }
+
+#starContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#starContainer {
+    display: flex;
+    flex-direction: row;
+
+}
