@@ -98,13 +98,22 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 #questionAnswer:hover {
     background-color: #85AD52;
     background-image: none;
     border-radius: 10px;
     cursor: pointer;
 }
+
+#questionAnswer[disabled=true]{
+    color: #7a8a76;
+}
+
+#questionAnswer:hover[disabled=true]{
+    cursor: not-allowed;
+    background-color: #A7D073;
+}
+
 
 p {
     text-align: center;

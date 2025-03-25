@@ -372,7 +372,6 @@ export function keysFunction(e, focusElement, setId) {
 export function createQuizPage(data) {
     dataValue = data
     totalAmt = data.length;
-    remainingAmt = count + 1;
     // u must remove the input tester body
     const bodySection = document.querySelector(".bodySection");
     const inputTester = bodySection.querySelector(".input-tester");

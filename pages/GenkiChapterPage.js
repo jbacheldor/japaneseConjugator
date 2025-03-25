@@ -26,6 +26,7 @@ export function createGenkiMenu(answers) {
     for (let i = 0; i < answers.length; i++) {
         let questionAnswer = document.createElement('button');
         questionAnswer.setAttribute('id', 'bookAnswer');
+        questionAnswer.setAttribute('disabled', true);
         questionAnswer.innerHTML = answers[i];
         bookTitle.append(questionAnswer);
         questionAnswer.addEventListener('click', selectMultipleElement);
