@@ -2,5 +2,8 @@
     "type": "module",
     "scripts": {
         "start": "npx serve"
+    },
+    "dependencies": {
+        "serve": "^14.2.4"
     }
 }

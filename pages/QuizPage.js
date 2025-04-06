@@ -1,3 +1,4 @@
+import { getFinalResults } from '../local-data/localServer.js';
 let currentElement = "";
 
 let answerValues = [];
@@ -57,6 +58,7 @@ export function keysFunction(e, focusElement, setId) {
         case 82:
             // for y
         case 89:
+
             // for m
         case 77:
             // for w
@@ -104,14 +106,14 @@ export function keysFunction(e, focusElement, setId) {
                         focusElement.value = 'ぴ'
                         break;
                     case 'ん':
+                    case 'm':
+                        focusElement.value = 'み'
+                        break;
                     case 'n':
                         focusElement.value = 'に'
                         break;
                     case 'h':
                         focusElement.value = 'ひ'
-                        break;
-                    case 'h':
-                        focusElement.value = 'み'
                         break;
                     case 'r':
                         focusElement.value = 'り'
@@ -174,6 +176,11 @@ export function keysFunction(e, focusElement, setId) {
                 }
             } else if (focusElement.value.length == 0) {
                 focusElement.value = 'あ'
+            } else if (focusElement.value.length == 4) {
+                switch (focusElement.value) {
+                    case 'きy':
+                        focusElement.value = "きゃ"
+                }
             }
             break;
             // case for o
@@ -349,6 +356,12 @@ export function keysFunction(e, focusElement, setId) {
 
             // b
         case 66:
+
+            // case for c
+        case 67:
+
+            // case for d
+        case 68:
 
             // z
         case 90:
@@ -638,10 +651,15 @@ async function getResults(answers) {
     let data = {}
 
     try {
-        await fetch(`http://localhost:8000/getGenkiResults?`, {
-            method: "POST",
-            body: JSON.stringify(answers),
-        })
+        // t his isn't working
+        if (true) {
+            getFinalResults(answers)
+        } else {
+            await fetch(`http://localhost:8000/getGenkiResults?`, {
+                method: "POST",
+                body: JSON.stringify(answers),
+            })
+        }
     } catch (error) {
         console.log('error', error)
     }

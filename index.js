@@ -171,8 +171,6 @@ function submitInfo(Event, data) {
     const selected = document.querySelectorAll('[selected="true"]');
     const newList = [];
 
-    console.log('selected', selected)
-
     if (selected.length == 0) {
         alert("select one jeez louise")
     } else {

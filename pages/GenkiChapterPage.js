@@ -1,4 +1,5 @@
 import { selectMultipleElement, createSubmitButton } from '../index.js';
+import { getChapters } from '../local-data/localServer.js';
 
 export function createGenkiMenu(answers) {
     // clean up girlies
@@ -48,14 +49,19 @@ async function getConjugations() {
     })
     let data = {}
     try {
-        await fetch(`http://localhost:8000/genkiChapters?` + new URLSearchParams({
-                chapters: chapterList,
-            }).toString())
-            .then((res) => {
-                if (res.status == 200) data = res.json();
-            }).catch((error) => {
-                console.log(error)
-            })
+        //  this isnt working rn process.env.env != "LOCAL"
+        if (true) {
+            data = await getChapters(chapterList)
+        } else {
+            await fetch(`http://localhost:8000/genkiChapters?` + new URLSearchParams({
+                    chapters: chapterList,
+                }).toString())
+                .then((res) => {
+                    if (res.status == 200) data = res.json();
+                }).catch((error) => {
+                    console.log(error)
+                })
+        }
     } catch (error) {
         console.log('error', error)
     }
