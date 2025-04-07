@@ -8,6 +8,7 @@ export async function getChapters(chapters) {
         let formdata
 
         try {
+            console.log('https://' + window.location.host + window.location.pathname)
             await fetch('https://' + window.location.host + window.location.pathname + '/localData/localData.json')
                 .then(response => response.json())
                 .then(data => {
@@ -37,7 +38,8 @@ export async function getChapters(chapters) {
                     type: '',
                     [form.form_type]: '',
                 })
-            }) potentialvalues.forEach((word) => {
+            })
+            potentialvalues.forEach((word) => {
                 goldenGooseList.forEach((wordForm) => {
                     let keys = Object.keys(wordForm)
                     keys.forEach((value) => {
