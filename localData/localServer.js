@@ -8,7 +8,7 @@ export async function getChapters(chapters) {
         let formdata
 
         try {
-            await fetch('http://' + window.location.host + '/localData/localData.json')
+            await fetch('http://' + window.location.host + window.location.pathname + '/localData/localData.json')
                 .then(response => response.json())
                 .then(data => {
                     jsondata = data
@@ -16,7 +16,7 @@ export async function getChapters(chapters) {
                 })
                 .catch(error => console.log(error));
 
-            await fetch('http://' + window.location.host + '/localData/localDataForms.json')
+            await fetch('http://' + window.location.host + window.location.pathname + '/localData/localDataForms.json')
                 .then(response => response.json())
                 .then(data => {
                     formdata = data
