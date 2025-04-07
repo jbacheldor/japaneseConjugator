@@ -8,7 +8,7 @@ export async function getChapters(chapters) {
         let formdata
 
         try {
-            await fetch('../localData/local-data.json')
+            await fetch('../localData/localData.json')
                 .then(response => response.json())
                 .then(data => {
                     jsondata = data
@@ -16,7 +16,7 @@ export async function getChapters(chapters) {
                 })
                 .catch(error => console.log(error));
 
-            await fetch('../localData/local-data-forms.json')
+            await fetch('../localData/localDataForms.json')
                 .then(response => response.json())
                 .then(data => {
                     formdata = data
@@ -91,7 +91,7 @@ export function getFinalResults(guesses) {
         let formdata
 
         try {
-            fetch('../localData/local-data.json')
+            fetch('../localData/localData.json')
                 .then(response => response.json())
                 .then(data => jsondata = data)
                 .catch(error => console.log(error));
@@ -100,7 +100,7 @@ export function getFinalResults(guesses) {
         }
 
         try {
-            fetch('../localData/local-data-forms.json')
+            fetch('../localData/localDataForms.json')
                 .then(response => response.json())
                 .then(data => formdata = data)
                 .catch(error => console.log(error));
