@@ -1,5 +1,6 @@
 import { createQuizPage } from "./pages/QuizPage.js";
 import { createGenkiMenu } from "./pages/GenkiChapterPage.js";
+import { createResultsPage } from "./pages/ResultsPage.js";
 
 const body = document.querySelector("#body");
 const menuSection = document.querySelector(".input-tester");
@@ -22,7 +23,10 @@ function createButtons(name, section, onClickFunc) {
 }
 
 function selectAll(Event) {
-    const bookAnswers = document.querySelectorAll('#bookAnswer');
+    // const bookAnswers2 = document.querySelectorAll('#bookAnswer ');
+    const bookAnswers = document.querySelectorAll('button#bookAnswer:not([disabled])')
+
+    // #bookAnswer 
 
     if (Event.target.getAttribute('selected') === "true") {
         Event.target.removeAttribute('selected');
@@ -50,10 +54,6 @@ function goBack() {
     const pageNum = sessionStorage.getItem('prevPage');
     menuSection.replaceChildren();
     figureOutPage(pageNum);
-}
-
-function createResultsPage() {
-
 }
 
 export function createSubmitButton(callbackFunction, parentNode) {
@@ -138,7 +138,11 @@ function createMenu(question, answers) {
             if (question === 'Which vocabulary do you want to study?') {
                 questionAnswer.addEventListener('click', selectMultipleElement);
             } else {
-                questionAnswer.addEventListener('click', selectSingleElement);
+                if (questionAnswer.innerHTML == "Build your Own" || questionAnswer.innerHTML == "jplt") {
+                    questionAnswer.setAttribute('disabled', true)
+                } else {
+                    questionAnswer.addEventListener('click', selectSingleElement);
+                }
             }
         }
 
@@ -164,26 +168,32 @@ function createMenu(question, answers) {
 
 function submitInfo(Event, data) {
     // Event.preventdefault()
-    const selected = document.querySelectorAll('#questionAnswer[selected="true"]');
+    const selected = document.querySelectorAll('[selected="true"]');
     const newList = [];
 
-    for (let i = 0; i < selected.length; i++) {
-        newList.push(selected[i].innerHTML);
-    }
-
-    menuSection.replaceChildren();
-
-    if (newList.includes('Build your Own')) {
-        figureOutPage(2);
-    } else if (newList.includes('Follow a Course')) {
-        figureOutPage(3);
-    } else if (newList.includes('genki')) {
-        figureOutPage(4);
-    } else if (newList.includes('jplt')) {
-        figureOutPage(5);
+    if (selected.length == 0) {
+        alert("select one jeez louise")
     } else {
-        createQuizPage(data);
+        for (let i = 0; i < selected.length; i++) {
+            newList.push(selected[i].innerHTML);
+        }
+
+        menuSection.replaceChildren();
+
+        if (newList.includes('Build your Own')) {
+            figureOutPage(2);
+        } else if (newList.includes('Follow a Course')) {
+            figureOutPage(3);
+        } else if (newList.includes('genki')) {
+            figureOutPage(4);
+        } else if (newList.includes('jplt')) {
+            figureOutPage(5);
+        } else {
+            // createResultsPage();
+            createQuizPage(data);
+        }
     }
+
 }
 // verb forms
 // adjective forms

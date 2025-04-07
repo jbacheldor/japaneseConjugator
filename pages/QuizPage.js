@@ -1,9 +1,9 @@
+import { getFinalResults } from '../local-data/localServer.js';
 let currentElement = "";
 
 let answerValues = [];
 let totalAmt = 0;
 let count = 0;
-let remainingAmt = 0;
 let dataValue = []
 
 
@@ -58,6 +58,7 @@ export function keysFunction(e, focusElement, setId) {
         case 82:
             // for y
         case 89:
+
             // for m
         case 77:
             // for w
@@ -105,14 +106,14 @@ export function keysFunction(e, focusElement, setId) {
                         focusElement.value = 'ぴ'
                         break;
                     case 'ん':
+                    case 'm':
+                        focusElement.value = 'み'
+                        break;
                     case 'n':
                         focusElement.value = 'に'
                         break;
                     case 'h':
                         focusElement.value = 'ひ'
-                        break;
-                    case 'h':
-                        focusElement.value = 'み'
                         break;
                     case 'r':
                         focusElement.value = 'り'
@@ -175,6 +176,11 @@ export function keysFunction(e, focusElement, setId) {
                 }
             } else if (focusElement.value.length == 0) {
                 focusElement.value = 'あ'
+            } else if (focusElement.value.length == 4) {
+                switch (focusElement.value) {
+                    case 'きy':
+                        focusElement.value = "きゃ"
+                }
             }
             break;
             // case for o
@@ -351,6 +357,12 @@ export function keysFunction(e, focusElement, setId) {
             // b
         case 66:
 
+            // case for c
+        case 67:
+
+            // case for d
+        case 68:
+
             // z
         case 90:
 
@@ -373,7 +385,6 @@ export function keysFunction(e, focusElement, setId) {
 export function createQuizPage(data) {
     dataValue = data
     totalAmt = data.length;
-    remainingAmt = count + 1;
     // u must remove the input tester body
     const bodySection = document.querySelector(".bodySection");
     const inputTester = bodySection.querySelector(".input-tester");
@@ -402,7 +413,7 @@ export function createQuizPage(data) {
 
     let form = document.createElement('span');
     form.setAttribute('id', 'formTitle');
-    form.innerHTML = dataValue[count].form
+    form.innerHTML = dataValue[count].form.replace(/[_]/g, ' ')
     topQuiz.append(form)
 
     let tutorial = document.createElement('button');
@@ -418,7 +429,7 @@ export function createQuizPage(data) {
     // add in remaining amount
     let remaining = document.createElement('div');
     remaining.setAttribute('id', 'remainingQuestions');
-    remaining.innerHTML = `${remainingAmt} / ${totalAmt}`
+    remaining.innerHTML = `${count + 1} / ${totalAmt}`
 
     bodySection.append(remaining);
 
@@ -527,14 +538,14 @@ export function createQuizPage(data) {
 
     let nextButton = document.createElement('button');
     nextButton.setAttribute('id', 'next');
-    nextButton.innerText = "end_game"
+    nextButton.innerText = "submit"
     nextButton.addEventListener("click", createValues)
     bodySection.append(nextButton)
 
     let submitButton = document.createElement('button');
     submitButton.setAttribute('id', 'submit');
-    submitButton.innerHTML = "submit";
-    submitButton.addEventListener("click", createValues);
+    submitButton.innerHTML = "end game";
+    // submitButton.addEventListener("click", createValues);
 
     bodySection.append(submitButton)
 }
@@ -556,9 +567,11 @@ function createValues() {
     })
 
     // then we rebuild
-
-    remainingAmt += 1;
     const newValue = dataValue[count]
+
+    const remainingBlock = document.querySelector("#remainingQuestions")
+    remainingBlock.innerHTML = `${count + 1} / ${totalAmt}`
+
 
     const superScript = document.querySelector("#superScript")
     const KanjiBlock = document.querySelector("#kanjiBlock")
@@ -572,7 +585,7 @@ function createValues() {
     superScript.innerHTML = newValue.stem_hiragana
     let type = newValue.type == "verb" ? "v. " : "adj. "
     translated.innerHTML = type + newValue.word
-    formBlock.innerHTML = newValue.form
+    formBlock.innerHTML = newValue.form.replace(/[_]/g, ' ')
 
     removeTiles()
 
@@ -638,10 +651,15 @@ async function getResults(answers) {
     let data = {}
 
     try {
-        await fetch(`http://localhost:8000/getGenkiResults?`, {
-            method: "POST",
-            body: JSON.stringify(answers),
-        })
+        // t his isn't working
+        if (true) {
+            getFinalResults(answers)
+        } else {
+            await fetch(`http://localhost:8000/getGenkiResults?`, {
+                method: "POST",
+                body: JSON.stringify(answers),
+            })
+        }
     } catch (error) {
         console.log('error', error)
     }

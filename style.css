@@ -98,13 +98,22 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 #questionAnswer:hover {
     background-color: #85AD52;
     background-image: none;
     border-radius: 10px;
     cursor: pointer;
 }
+
+#questionAnswer[disabled=true]{
+    color: #7a8a76;
+}
+
+#questionAnswer:hover[disabled=true]{
+    cursor: not-allowed;
+    background-color: #A7D073;
+}
+
 
 p {
     text-align: center;
@@ -421,4 +430,27 @@ div.characterColumn {
 div.activeTiles:hover {
     cursor: pointer;
     background-color: #eeecbc;
+}
+
+
+.star {
+    background-image: url("./svgs/Star.svg");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.star svg path{
+    fill: currentcolor;
+  }
+
+#starContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#starContainer {
+    display: flex;
+    flex-direction: row;
+
 }
