@@ -1,5 +1,5 @@
 import { selectMultipleElement, createSubmitButton } from '../index.js';
-import { getChapters } from '../local-data/localServer.js';
+import { getChapters } from '../localData/localServer.js';
 
 export function createGenkiMenu(answers) {
     // clean up girlies

@@ -8,7 +8,7 @@ export async function getChapters(chapters) {
         let formdata
 
         try {
-            await fetch('../local-data/local-data.json')
+            await fetch('../localData/local-data.json')
                 .then(response => response.json())
                 .then(data => {
                     jsondata = data
@@ -16,7 +16,7 @@ export async function getChapters(chapters) {
                 })
                 .catch(error => console.log(error));
 
-            await fetch('../local-data/local-data-forms.json')
+            await fetch('../localData/local-data-forms.json')
                 .then(response => response.json())
                 .then(data => {
                     formdata = data
@@ -91,7 +91,7 @@ export function getFinalResults(guesses) {
         let formdata
 
         try {
-            fetch('../local-data/local-data.json')
+            fetch('../localData/local-data.json')
                 .then(response => response.json())
                 .then(data => jsondata = data)
                 .catch(error => console.log(error));
@@ -100,7 +100,7 @@ export function getFinalResults(guesses) {
         }
 
         try {
-            fetch('../local-data/local-data-forms.json')
+            fetch('../localData/local-data-forms.json')
                 .then(response => response.json())
                 .then(data => formdata = data)
                 .catch(error => console.log(error));
@@ -117,10 +117,6 @@ export function getFinalResults(guesses) {
             // and then calculating that amount
 
         let correct = 0;
-        // const { jsondata } = await
-        // import ("../local-data/local-data.json", { assert: { type: "json" } })
-        // const { formdata } = await
-        // import ("../local-data/local-data-forms.json", { assert: { type: "json" } })
         guesses.forEach((guess) => {
             let found = jsondata.find((record) => record["word"] == guess.word)
 

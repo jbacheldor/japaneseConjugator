@@ -1,4 +1,4 @@
-import { getFinalResults } from '../local-data/localServer.js';
+import { getFinalResults } from '../localData/localServer.js';
 let currentElement = "";
 
 let answerValues = [];
